@@ -1,38 +1,48 @@
-import React from "react";
+import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import TweetAction from "./TweetAction";
 
-const Tweet = ({tweet, addLike, addComment, addRetweet}) => {
-    const { profileImgSrc, profileName, profileMention, postTime, approved, postContent, comments, retweets, likes } = tweet;
-    return (
-        <div className="feed-post">
-            <div>
-                <img className="profile-picture" src={profileImgSrc} alt="profile"/>
-            </div>
-            <div className="post">
-                <div className="post-information">
-                    <div className="profile-information">
-                        <div className="profile-name">{profileName}</div>
-                        <div className={approved ? "approved" : "not-approved"}/>
-                        <div className="profile-mention">@{profileMention}  </div>
-                        <div className="post-tile post-time">{postTime}</div>
+class Tweet extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {tweet: props.tweet};
+    }
+
+    render() {
+        const {profileImgSrc, profileName, profileMention, postTime, approved, postContent, comments, retweets, likes} = this.state.tweet;
+
+        return (
+            <div className="feed-post">
+                <div>
+                    <img className="profile-picture" src={profileImgSrc} alt="profile"/>
+                </div>
+                <div className="post">
+                    <div className="post-information">
+                        <div className="profile-information">
+                            <div className="profile-name">{profileName}</div>
+                            <div className={approved ? "approved" : "not-approved"}/>
+                            <div className="profile-mention">@{profileMention}  </div>
+                            <div className="post-tile post-time">{postTime}</div>
+                        </div>
+                        <div className="arrow-down icon-hover"/>
                     </div>
-                    <div className="arrow-down icon-hover"/>
-                </div>
-                <div className="post-content">
-                    <span>{postContent}</span>
-                </div>
-                <div className="post-actions">
-                    <TweetAction onClick={addComment} divClassName="comments" content={comments} iconClass="speech-bubble" />
-                    <TweetAction onClick={addRetweet} divClassName="retweets" content={retweets} iconClass="retweet" />
-                    <TweetAction onClick={addLike} divClassName="likes" content={likes} iconClass="heart" />
-                    <TweetAction iconClass="upload" />
-                    <TweetAction iconClass="delete" />
+                    <div className="post-content">
+                        <span>{postContent}</span>
+                    </div>
+                    <div className="post-actions">
+                        <TweetAction onClick={this.props.addComment} divClassName="comments" content={comments}
+                                     iconClass="speech-bubble"/>
+                        <TweetAction onClick={this.props.addRetweet} divClassName="retweets" content={retweets}
+                                     iconClass="retweet"/>
+                        <TweetAction onClick={this.props.addLike} divClassName="likes" content={likes} iconClass="heart"/>
+                        <TweetAction iconClass="upload"/>
+                        <TweetAction onClick={this.props.deleteTweet} iconClass="delete"/>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 const TweetStructure = PropTypes.shape({
     profileImgSrc: PropTypes.string.isRequired,
@@ -48,9 +58,10 @@ const TweetStructure = PropTypes.shape({
 
 Tweet.propTypes = {
     tweet: TweetStructure.isRequired,
+    deleteTweet: PropTypes.func.isRequired,
+    addLike: PropTypes.func.isRequired,
     addComment: PropTypes.func.isRequired,
     addRetweet: PropTypes.func.isRequired,
-    addLike: PropTypes.func.isRequired,
 }
 
 export default Tweet;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavigationMenu from "./Tweeter/NavigationMenu/navigationMenu";
+import NavigationMenu from "./Tweeter/NavigationMenu/NavigationMenu";
 import CenterPage from "./Tweeter/CenterPage/centerPage";
 import Loading from "./Tweeter/Loading/loading";
 import RightPage from "./Tweeter/RightPage/rightPage";

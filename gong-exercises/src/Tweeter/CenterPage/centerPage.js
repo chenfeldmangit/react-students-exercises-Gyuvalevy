@@ -3,33 +3,7 @@ import '../../css/twitter-left-side.css';
 import TweetsList from "./TweetsList";
 import AddTweet from "./AddTweet";
 import '../../css/twitter-center-side.css';
-
-let tweets = [
-    {
-        key: 1,
-        profileName: "Benny Gantz",
-        profileMention: "gantzbe",
-        approved: true,
-        profileImgSrc: 'https://pbs.twimg.com/profile_images/1156850474110345216/FWeRQirQ_bigger.jpg',
-        comments: 117,
-        retweets: 31,
-        likes: 300,
-        postTime: '1h',
-        postContent: 'הדגשתי שראוי לחברי הכנסת לשמש דוגמה לציבור בישראל ולהוכיח כי ניתן לתפקד גם בעת משבר, תוך הפגנת אחריות והקפדה על הוראות משרד הבריאות, בין אם בקיום ישיבות בשיחות וידאו או בפתרונות יצירתיים אחרים.',
-    },
-    {
-        key: 2,
-        profileName: "Yuval Levy",
-        profileMention: "yuvalevy",
-        approved: false,
-        profileImgSrc: 'https://lh3.googleusercontent.com/-gJS19so4rY4/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nB49lJKdInn1oTmsEQ5pA5HC8OlCw.CMID/s83-c/photo.jpg',
-        comments: 117,
-        retweets: 31,
-        likes: 300,
-        postTime: '2h',
-        postContent: 'HALAS Corona! מה יהיה!?!',
-    },
-]
+import TweeterLocalStorage from "./../TweeterLocalStorage";
 
 const profilesInfo = [
     {
@@ -62,36 +36,54 @@ class CenterPage extends Component {
     constructor(props) {
         super(props);
         this.props.changeLoading(false);
-        this.state = {tweetsList: tweets}
+        this.state = {tweetsList: TweeterLocalStorage.getTweets()}
     }
 
-    tweetAddLike = (tweetKey) =>
-        () => {
-            const tweets = this.state.tweetsList;
-            let tweetIndex = tweets.findIndex((value, index) => value.key === tweetKey);
-            tweets[tweetIndex].likes++;
-            this.setState({tweetsList: tweets});
-        }
+    replaceTweet(newTweet) {
+        TweeterLocalStorage.replaceTweetByKey(newTweet);
 
+        const newTweets = this.state.tweetsList;
+        const tweetIndex = newTweets.findIndex(value => value.key === newTweet.key);
+        newTweets[tweetIndex] = newTweet;
+        this.setState({tweetsList: newTweets});
+    }
 
-    tweetAddComment = (tweetKey) =>
-        () => {
-            const tweets = this.state.tweetsList;
-            let tweetIndex = tweets.findIndex((value, index) => value.key === tweetKey);
-            tweets[tweetIndex].comments++;
-            this.setState({tweetsList: tweets});
-        }
+    appendTweet(newTweet) {
+        TweeterLocalStorage.appendTweet(newTweet);
 
-    tweetAddRetweet = (tweetKey) =>
-        () => {
-            const tweets = this.state.tweetsList;
-            let tweetIndex = tweets.findIndex((value, index) => value.key === tweetKey);
-            tweets[tweetIndex].retweets++;
-            this.setState({tweetsList: tweets});
-        }
+        const tweets = this.state.tweetsList;
+        tweets.splice(0, 0, newTweet);
+        this.setState({tweetsList: tweets});
+    }
 
+    deleteTweet = (tweet) => {
+        TweeterLocalStorage.removeTweet(tweet);
+        const tweets = this.state.tweetsList;
+        let index = tweets.findIndex(value => value.key === tweet.key);
+        tweets.splice(index, 1);
 
-    createTweet(content) {
+        this.setState({tweetsList: tweets});
+    }
+
+    addLike = (tweet) => {
+        const newTweet = tweet;
+        newTweet.likes++;
+        this.replaceTweet(newTweet);
+    }
+
+    addComment = (tweet) => {
+        const newTweet = tweet;
+        newTweet.comments++;
+        this.replaceTweet(newTweet);
+    }
+
+    addRetweet = (tweet) => {
+        const newTweet = tweet;
+        newTweet.retweets++;
+        this.replaceTweet(newTweet);
+    }
+
+    createTweet = (content) => {
         let now = new Date();
         const newTweet = {
             key: Math.floor(Math.random() * 100000),
@@ -106,9 +98,7 @@ class CenterPage extends Component {
             postContent: content,
         };
 
-        const tweets = this.state.tweetsList;
-        tweets.splice(0, 0, newTweet);
-        this.setState({tweetsList: tweets});
+        this.appendTweet(newTweet);
     }
 
     render() {
@@ -119,9 +109,10 @@ class CenterPage extends Component {
                     <AddTweet sendTweet={(content) => this.createTweet(content)}/>
                     <TweetsList
                         tweets={this.state.tweetsList}
-                        tweetAddLike={this.tweetAddLike}
-                        tweetAddComment={this.tweetAddComment}
-                        tweetAddRetweet={this.tweetAddRetweet}
+                        deleteTweet={this.deleteTweet}
+                        addLike={this.addLike}
+                        addRetweet={this.addRetweet}
+                        addComment={this.addComment}
                     />
                 </div>
             </div>

@@ -8,6 +8,13 @@ class AddTweet extends Component {
         this.state = {content: ''};
     }
 
+    submitTweet = () => {
+        if (this.state.content) {
+            this.setState({content: ''});
+            return this.props.sendTweet(this.state.content);
+        }
+    }
+
     render() {
         return (
             <div id="addTweet" className="text-area">
@@ -23,8 +30,7 @@ class AddTweet extends Component {
                     </label>
                 </div>
                 <div>
-                    <button className="basic-button edit-profile-button" id="addTweetButton"
-                            onClick={() => this.props.sendTweet(this.state.content)}>
+                    <button className="basic-button edit-profile-button" id="addTweetButton" onClick={this.submitTweet} >
                         Tweet
                     </button>
                 </div>
