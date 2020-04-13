@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Switch, Route} from 'react-router-dom';
 import '../../sass/twitter-left-side.sass';
 import '../../sass/twitter-center-side.sass';
 import TweeterLocalStorage from "./../TweeterLocalStorage";
@@ -14,10 +15,7 @@ class CenterPage extends Component {
         ProfilesLocalStorage.populateLocalStorage();
         TweeterLocalStorage.populateLocalStorage();
 
-        this.state = {
-            tweetsList: TweeterLocalStorage.getTweets(),
-            profile: ProfilesLocalStorage.getCurrentProfile(),
-        }
+        this.state = {tweetsList: TweeterLocalStorage.getTweets()}
     }
 
     replaceTweet(newTweet) {
@@ -68,10 +66,10 @@ class CenterPage extends Component {
         let now = new Date();
         const newTweet = {
             key: Math.floor(Math.random() * 100000),
-            profileName: this.state.profile.name,
-            profileMention: this.state.profile.mention,
-            approved: this.state.profile.approved,
-            profileImgSrc: this.state.profile.imgSrc,
+            profileName: this.props.profile.name,
+            profileMention: this.props.profile.mention,
+            approved: this.props.profile.approved,
+            profileImgSrc: this.props.profile.imgSrc,
             comments: 0,
             retweets: 0,
             likes: 0,
@@ -82,22 +80,35 @@ class CenterPage extends Component {
         this.appendTweet(newTweet);
     }
 
-    render() {
-        return (
-            <div id="centerPage" className="center-wrapper">
-                <HomePage
-                    tweetsList={this.state.tweetsList}
-                    sendTweet={(content) => this.createTweet(content)}
-                    deleteTweet={this.deleteTweet}
-                    addLike={this.addLike}
-                    addRetweet={this.addRetweet}
-                    addComment={this.addComment}
-                />
-                <ProfilePage profile={this.state.profile}/>
-            </div>
+    getProfileComponent() {
+        return () => (
+            <ProfilePage profile={this.props.profile}/>
         );
     }
 
+    getHomePageComponent() {
+        return () => (
+            <HomePage
+                tweetsList={this.state.tweetsList}
+                sendTweet={(content) => this.createTweet(content)}
+                deleteTweet={this.deleteTweet}
+                addLike={this.addLike}
+                addRetweet={this.addRetweet}
+                addComment={this.addComment}
+            />
+        );
+    }
+
+    render() {
+        return (
+                <div id="centerPage" className="center-wrapper">
+                    <Switch>
+                        <Route path="/" exact component={this.getHomePageComponent()}/>
+                        <Route path="/profile" component={this.getProfileComponent()}/>
+                    </Switch>
+                </div>
+        );
+    }
 }
 
 export default CenterPage;

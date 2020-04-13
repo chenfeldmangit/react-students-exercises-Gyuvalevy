@@ -1,5 +1,6 @@
 const KEY_PROFILES = 'profiles';
-const CURRENT_INDEX = 0;
+let CURRENT_INDEX = 0;
+let PROFILES_COUNT = 0;
 
 class ProfilesLocalStorage {
     static isLocalStorageExists = () => {
@@ -40,12 +41,20 @@ class ProfilesLocalStorage {
     };
 
     static getProfiles = () => {
-        return JSON.parse(localStorage.getItem(KEY_PROFILES));
+        let profiles = JSON.parse(localStorage.getItem(KEY_PROFILES));
+        PROFILES_COUNT = profiles ? profiles.length : 0;
+        return profiles;
     };
 
     static getCurrentProfile = () => {
         return ProfilesLocalStorage.getProfiles()[CURRENT_INDEX];
     };
+
+    static switchProfile() {
+        CURRENT_INDEX++;
+        if (CURRENT_INDEX === PROFILES_COUNT)
+            CURRENT_INDEX = 0;
+    }
 
     static getKeyProfiles = () => {
         return KEY_PROFILES

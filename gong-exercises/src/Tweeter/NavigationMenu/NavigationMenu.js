@@ -7,16 +7,16 @@ class NavigationMenu extends Component {
         return (
             <>
                 <div className="left-wrapper">
-                    <MenuItem className="left-menu-icon" />
-                    <MenuItem className="left-menu-home" text="Home" id="leftMenuHomeLink" />
-                    <MenuItem className="left-menu-explore" text="Explore" />
-                    <MenuItem className="left-menu-notification" text="Notification" />
-                    <MenuItem className="left-menu-messages" text="Messages" />
-                    <MenuItem className="left-menu-bookmarks" text="Bookmarks"  />
-                    <MenuItem className="left-menu-lists" text="Lists" />
-                    <MenuItem id="leftMenuProfileLink" text="Profile" imageSrc="https://pbs.twimg.com/profile_images/1156850474110345216/FWeRQirQ_bigger.jpg" />
-                    <MenuItem className="left-menu-more" text="More" />
-                    <button className="basic-button left-tweet-button">Tweet</button>
+                    <MenuItem className="menu-item left-menu-icon" />
+                    <MenuItem className="menu-item left-menu-home" text="Home" id="leftMenuHomeLink" link="/" />
+                    <MenuItem className="menu-item left-menu-explore" text="Explore" />
+                    <MenuItem className="menu-item left-menu-notification" text="Notification" />
+                    <MenuItem className="menu-item left-menu-messages" text="Messages" />
+                    <MenuItem className="menu-item left-menu-bookmarks" text="Bookmarks"  />
+                    <MenuItem className="menu-item left-menu-lists" text="Lists" />
+                    <MenuItem className="menu-item" id="leftMenuProfileLink" text="Profile" imageSrc={this.props.profile.imgSrc} link="/profile" />
+                    <MenuItem className="menu-item left-menu-more" text="More" />
+                    <button className="menu-item basic-button left-tweet-button" onClick={this.props.switchProfile}>Switch Profile</button>
                 </div>
             </>
         );
