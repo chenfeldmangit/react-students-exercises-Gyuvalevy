@@ -65,32 +65,31 @@ class CenterPage extends Component {
         this.state = {tweetsList: tweets}
     }
 
-    tweetAddLike(tweetKey) {
-        return () => {
+    tweetAddLike = (tweetKey) =>
+        () => {
             const tweets = this.state.tweetsList;
             let tweetIndex = tweets.findIndex((value, index) => value.key === tweetKey);
             tweets[tweetIndex].likes++;
             this.setState({tweetsList: tweets});
         }
-    }
 
-    tweetAddComment(tweetKey) {
-        return () => {
+
+    tweetAddComment = (tweetKey) =>
+        () => {
             const tweets = this.state.tweetsList;
             let tweetIndex = tweets.findIndex((value, index) => value.key === tweetKey);
             tweets[tweetIndex].comments++;
             this.setState({tweetsList: tweets});
         }
-    }
 
-    tweetAddRetweet(tweetKey) {
-        return () => {
+    tweetAddRetweet = (tweetKey) =>
+        () => {
             const tweets = this.state.tweetsList;
             let tweetIndex = tweets.findIndex((value, index) => value.key === tweetKey);
             tweets[tweetIndex].retweets++;
             this.setState({tweetsList: tweets});
         }
-    }
+
 
     createTweet(content) {
         let now = new Date();
