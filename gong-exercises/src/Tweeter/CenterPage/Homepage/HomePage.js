@@ -1,8 +1,8 @@
 import React from "react";
 import TweetsList from "./TweetsList";
 import AddTweet from "./AddTweet";
-import '../../sass/twitter-center-side.sass';
-import '../../sass/twitter-left-side.sass';
+import '../../../sass/twitter-center-side.sass';
+import '../../../sass/twitter-left-side.sass';
 
 const HomePage = ({tweetsList, sendTweet, deleteTweet, addLike, addRetweet, addComment}) => {
     return (

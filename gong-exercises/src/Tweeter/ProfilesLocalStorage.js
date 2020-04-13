@@ -56,6 +56,12 @@ class ProfilesLocalStorage {
             CURRENT_INDEX = 0;
     }
 
+    static setCurrentProfile(profile) {
+        let profiles = JSON.parse(localStorage.getItem(KEY_PROFILES));
+        profiles[CURRENT_INDEX] = profile;
+        localStorage.setItem(KEY_PROFILES, JSON.stringify(profiles));
+    };
+
     static getKeyProfiles = () => {
         return KEY_PROFILES
     };

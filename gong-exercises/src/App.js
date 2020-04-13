@@ -27,13 +27,24 @@ class App extends Component {
         this.setState({profile: ProfilesLocalStorage.getCurrentProfile()});
     }
 
+    changeCurrentProfile = (profileNewDetails) => {
+
+        const changedProfile = this.state.profile;
+        changedProfile.name = profileNewDetails.name;
+        changedProfile.mention = profileNewDetails.mention;
+        changedProfile.description = profileNewDetails.description;
+
+        ProfilesLocalStorage.setCurrentProfile(changedProfile);
+        this.setState({profile: ProfilesLocalStorage.getCurrentProfile()});
+    }
+
     render() {
         return (
             <BrowserRouter>
                 <div className="main-wrapper">
                     <NavigationMenu switchProfile={this.switchProfile} profile={this.state.profile}/>
                     <Loading show={this.state.showLoading}/>
-                    <CenterPage changeLoading={this.changeLoading} profile={this.state.profile}/>
+                    <CenterPage changeLoading={this.changeLoading} profile={this.state.profile} saveProfile={this.changeCurrentProfile} />
                     <RightPage/>
                 </div>
             </BrowserRouter>

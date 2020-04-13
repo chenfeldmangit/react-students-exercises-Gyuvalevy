@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import '../../sass/twitter-add-tweet.sass';
+import '../../../sass/twitter-add-tweet.sass';
 
 class AddTweet extends Component {
     constructor(props) {

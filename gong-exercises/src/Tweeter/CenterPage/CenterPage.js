@@ -4,8 +4,9 @@ import '../../sass/twitter-left-side.sass';
 import '../../sass/twitter-center-side.sass';
 import TweeterLocalStorage from "./../TweeterLocalStorage";
 import ProfilesLocalStorage from "../ProfilesLocalStorage";
-import HomePage from "./HomePage";
-import ProfilePage from "./ProfilePage";
+import HomePage from "./Homepage/HomePage";
+import ProfilePage from "./Profile/ProfilePage";
+import EditProfilePage from "./Profile/EditProfilePage";
 
 class CenterPage extends Component {
     constructor(props) {
@@ -80,12 +81,6 @@ class CenterPage extends Component {
         this.appendTweet(newTweet);
     }
 
-    getProfileComponent() {
-        return () => (
-            <ProfilePage profile={this.props.profile}/>
-        );
-    }
-
     getHomePageComponent() {
         return () => (
             <HomePage
@@ -99,12 +94,25 @@ class CenterPage extends Component {
         );
     }
 
+    getProfileComponent() {
+        return () => (
+            <ProfilePage profile={this.props.profile}/>
+        );
+    }
+
+    getEditProfileComponent() {
+        return () => (
+            <EditProfilePage profile={this.props.profile} save={this.props.saveProfile}/>
+        );
+    }
+
     render() {
         return (
                 <div id="centerPage" className="center-wrapper">
                     <Switch>
                         <Route path="/" exact component={this.getHomePageComponent()}/>
-                        <Route path="/profile" component={this.getProfileComponent()}/>
+                        <Route path="/profile" exact component={this.getProfileComponent()}/>
+                        <Route path="/profile/edit" component={this.getEditProfileComponent()}/>
                     </Switch>
                 </div>
         );

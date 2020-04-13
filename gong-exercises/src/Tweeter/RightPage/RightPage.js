@@ -1,16 +1,16 @@
 import React from "react";
 import '../../sass/twitter-right-side.sass';
+import EditBox from "../Common/EditBox";
 
 const RightPage = () => {
     return (
         <>
             <div className="right-wrapper">
-                <div className="basic-input-wrapper">
-                    <i className="search-icon"/>
-                    <label>
-                        <input id="searchTweet" placeholder="Search Twitter" className="basic-input"/>
-                    </label>
-                </div>
+                <EditBox boxId="searchTweet"
+                         placeholder="Search Twitter"
+                         iconClass="search-icon"
+                         onChangeFunc={()=> alert("Search")}
+                 />
                 <div className="right-box-wrapper">
                     Israel trends
                 </div>

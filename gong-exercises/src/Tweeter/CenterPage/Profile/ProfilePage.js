@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import '../../sass/twitter-left-side.sass';
-import '../../sass/twitter-center-side.sass';
+import '../../../sass/twitter-left-side.sass';
+import '../../../sass/twitter-center-side.sass';
+import {Link} from "react-router-dom";
 
 const Follow = ({iconClass, link}) => {
     return (
@@ -17,7 +18,9 @@ const ProfilePage = ({profile}) => {
         <div id="profileCenter" className="center-container">
             <div className="profile-title">
                 <div className="title">Profile</div>
-                <button className="basic-button edit-profile-button">Edit Profile</button>
+                <Link to="/profile/edit">
+                    <button className="basic-button edit-profile-button">Edit Profile</button>
+                </Link>
             </div>
             <div className="profile-details">
                 <div className="profile-basic-info">
@@ -55,7 +58,7 @@ const Profile = PropTypes.shape({
     imgSrc: PropTypes.string.isRequired,
 })
 
-ProfilePage.prototype = {
+ProfilePage.propTypes = {
     profile: Profile.isRequired,
 }
 
