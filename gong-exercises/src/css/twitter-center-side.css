@@ -1,0 +1,128 @@
+@charset "UTF-8";
+#loadingCenter.center-wrapper {
+  text-align: center;
+}
+
+.center-wrapper {
+  flex-grow: 3;
+  max-width: 60vw;
+  width: 60vw;
+}
+.center-wrapper .title {
+  overflow: hidden;
+  height: 30px;
+}
+.center-wrapper .center-container > div {
+  border: 3px solid #e6ecf0;
+  border-top-width: 0;
+  max-height: 90vh;
+}
+.center-wrapper .center-container > :first-child {
+  border-top: 3px solid #e6ecf0;
+  font-weight: bold;
+}
+.center-wrapper .center-container > .scroll {
+  overflow-y: scroll;
+}
+
+.profile-mention, .post-tile, .profile-description {
+  color: #657786;
+}
+
+#homepageCenter .feed-post {
+  display: flex;
+  flex-direction: row;
+  border-top: 3px solid #e6ecf0;
+}
+#homepageCenter .feed-post:first-child {
+  border-top-width: 0;
+}
+#homepageCenter .feed-post > div {
+  margin: 10px;
+}
+#homepageCenter .feed-post .post {
+  flex-grow: 3;
+}
+#homepageCenter .feed-post .post .post-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 50px;
+}
+#homepageCenter .feed-post .post .post-actions i {
+  height: 20px;
+  width: 20px;
+  padding: 10px;
+}
+#homepageCenter .feed-post .post .post-actions > :hover {
+  color: #1ea2f3;
+}
+#homepageCenter .feed-post .post .action {
+  display: flex;
+  align-items: center;
+}
+#homepageCenter .feed-post:hover {
+  flex-grow: 1;
+  background-color: #f5f8fa;
+}
+#homepageCenter .feed-post .post-information {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 5px;
+  padding-top: 5px;
+}
+#homepageCenter .feed-post .profile-information {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+#homepageCenter .feed-post .profile-information > div {
+  margin-right: 5px;
+}
+#homepageCenter .feed-post .profile-information .profile-name {
+  font-weight: bold;
+}
+#homepageCenter .feed-post .profile-information .profile-mention:after {
+  content: "·";
+  padding-left: 5px;
+}
+
+#profileCenter .profile-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#profileCenter #profileName {
+  font-weight: bold;
+}
+#profileCenter .profile-details {
+  padding: 10px;
+}
+#profileCenter .profile-details .profile-basic-info {
+  display: flex;
+  flex-direction: row;
+}
+#profileCenter .profile-details .profile-basic-info > div {
+  margin-right: 10px;
+}
+#profileCenter .profile-details > div {
+  margin-bottom: 20px;
+}
+#profileCenter .profile-details .profile-section {
+  display: flex;
+  flex-direction: row;
+}
+#profileCenter .profile-details .profile-section > div {
+  margin-right: 10px;
+}
+#profileCenter #profileFollowing, #profileCenter #profileFollowers {
+  font-weight: bold;
+}
+#profileCenter .edit-profile-button {
+  width: 150px;
+}
+
+/*# sourceMappingURL=twitter-center-side.css.map */
