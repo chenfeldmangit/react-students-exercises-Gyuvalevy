@@ -1,43 +1,23 @@
 import React, {Component} from "react";
 import '../../css/twitter-left-side.css';
-import TweetsList from "./TweetsList";
-import AddTweet from "./AddTweet";
 import '../../css/twitter-center-side.css';
 import TweeterLocalStorage from "./../TweeterLocalStorage";
+import ProfilesLocalStorage from "../ProfilesLocalStorage";
 import HomePage from "./HomePage";
-
-const profilesInfo = [
-    {
-        name: "Yuval Levy",
-        mention: "yuvalevy",
-        approved: false,
-        description: "Welcome to my profile! I am Yuval",
-        address: "Tel Aviv",
-        homelink: "yuvalevy.com",
-        following: 231,
-        followers: 155,
-        imgSrc: 'https://lh3.googleusercontent.com/-gJS19so4rY4/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nB49lJKdInn1oTmsEQ5pA5HC8OlCw.CMID/s83-c/photo.jpg',
-    },
-    {
-        name: "Benny Gantz",
-        approved: true,
-        mention: "gantzbe",
-        description: "נשוי לרויטל ואבא ל-4 ילדים. הרמטכ\"ל ה- 20 של צה\"ל \n" +
-            ". יו\"ר \"כחול לבן\" \n",
-        imgSrc: 'https://pbs.twimg.com/profile_images/1156850474110345216/FWeRQirQ_bigger.jpg',
-        address: "Tel Aviv",
-        homelink: "beni.com",
-        following: 23,
-        followers: 1000,
-    }];
-
-let profile = profilesInfo[0];
+import ProfilePage from "./ProfilePage";
 
 class CenterPage extends Component {
     constructor(props) {
         super(props);
         this.props.changeLoading(false);
-        this.state = {tweetsList: TweeterLocalStorage.getTweets()}
+
+        ProfilesLocalStorage.populateLocalStorage();
+        TweeterLocalStorage.populateLocalStorage();
+
+        this.state = {
+            tweetsList: TweeterLocalStorage.getTweets(),
+            profile: ProfilesLocalStorage.getCurrentProfile(),
+        }
     }
 
     replaceTweet(newTweet) {
@@ -88,10 +68,10 @@ class CenterPage extends Component {
         let now = new Date();
         const newTweet = {
             key: Math.floor(Math.random() * 100000),
-            profileName: profile.name,
-            profileMention: profile.mention,
-            approved: profile.approved,
-            profileImgSrc: profile.imgSrc,
+            profileName: this.state.profile.name,
+            profileMention: this.state.profile.mention,
+            approved: this.state.profile.approved,
+            profileImgSrc: this.state.profile.imgSrc,
             comments: 0,
             retweets: 0,
             likes: 0,
@@ -113,6 +93,7 @@ class CenterPage extends Component {
                     addRetweet={this.addRetweet}
                     addComment={this.addComment}
                 />
+                <ProfilePage profile={this.state.profile}/>
             </div>
         );
     }

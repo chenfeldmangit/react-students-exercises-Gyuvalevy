@@ -1,7 +1,14 @@
 const KEY_TWEETS = 'tweets';
 
 class TweeterLocalStorage {
+    static isLocalStorageExists = () => {
+        return !!TweeterLocalStorage.getTweets();
+    };
+
     static populateLocalStorage = () => {
+        if (TweeterLocalStorage.isLocalStorageExists())
+            return;
+
         let initialTweets = [
             {
                 key: 1,
@@ -61,7 +68,6 @@ class TweeterLocalStorage {
     static getKeyTweets = () => {
         return KEY_TWEETS
     };
-
 }
 
 export default TweeterLocalStorage;

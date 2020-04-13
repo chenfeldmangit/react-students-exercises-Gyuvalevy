@@ -9,7 +9,7 @@ const MenuItem = (props) => {
                 className={props.className}>
                 {
                     props.imageSrc
-                        ? (<i><img className="profile-picture" id="profileImage" src={ props.imageSrc } alt="profile"/></i>)
+                        ? (<i><img className="profile-picture" src={ props.imageSrc } alt="profile"/></i>)
                         : (<i/>)
                 }
                 {props.text && <span>{props.text}</span>}
