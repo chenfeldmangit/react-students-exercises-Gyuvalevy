@@ -3,9 +3,9 @@ import '../../css/twitter-add-tweet.css';
 import PropTypes from "prop-types";
 
 class AddTweet extends Component {
-    constructor() {
-        super();
-        this.state = {content: 'lulu'};
+    constructor(props) {
+        super(props);
+        this.state = {content: ''};
     }
 
     render() {
@@ -42,5 +42,5 @@ class AddTweet extends Component {
 export default AddTweet;
 
 AddTweet.propTypes = {
-    sendTweet: PropTypes.func,
+    sendTweet: PropTypes.func.isRequired,
 }

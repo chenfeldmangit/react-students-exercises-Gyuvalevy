@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import TweetAction from "./TweetAction";
 
 const Tweet = ({tweet, addLike, addComment, addRetweet}) => {
     const { profileImgSrc, profileName, profileMention, postTime, approved, postContent, comments, retweets, likes } = tweet;
@@ -22,24 +23,11 @@ const Tweet = ({tweet, addLike, addComment, addRetweet}) => {
                     <span>{postContent}</span>
                 </div>
                 <div className="post-actions">
-                    <div className="action comments" onClick={addComment}>
-                        <i className="small-icon icon-space-pad speech-bubble icon-hover"/>
-                        <span>{comments}</span>
-                    </div>
-                    <div className="action retweets" onClick={addRetweet}>
-                        <i className="small-icon icon-space-pad retweet icon-hover"/>
-                        <span>{retweets}</span>
-                    </div>
-                    <div className="action likes" onClick={addLike}>
-                        <i className="small-icon icon-space-pad heart icon-hover"/>
-                        <span>{likes}</span>
-                    </div>
-                    <div className="action">
-                        <i className="small-icon icon-space-pad upload icon-hover"/>
-                    </div>
-                    <div className="action">
-                        <i className="small-icon icon-space-pad delete icon-hover"/>
-                    </div>
+                    <TweetAction onClick={addComment} divClassName="comments" content={comments} iconClass="speech-bubble" />
+                    <TweetAction onClick={addRetweet} divClassName="retweets" content={retweets} iconClass="retweet" />
+                    <TweetAction onClick={addLike} divClassName="likes" content={likes} iconClass="heart" />
+                    <TweetAction iconClass="upload" />
+                    <TweetAction iconClass="delete" />
                 </div>
             </div>
         </div>
@@ -47,22 +35,22 @@ const Tweet = ({tweet, addLike, addComment, addRetweet}) => {
 };
 
 const TweetStructure = PropTypes.shape({
-    profileImgSrc: PropTypes.string,
-    profileName: PropTypes.string,
-    profileMention: PropTypes.string,
-    approved: PropTypes.bool,
-    postTime: PropTypes.string,
-    postContent: PropTypes.string,
-    comments: PropTypes.number,
-    retweets: PropTypes.number,
-    likes: PropTypes.number,
+    profileImgSrc: PropTypes.string.isRequired,
+    profileName: PropTypes.string.isRequired,
+    profileMention: PropTypes.string.isRequired,
+    approved: PropTypes.bool.isRequired,
+    postTime: PropTypes.string.isRequired,
+    postContent: PropTypes.string.isRequired,
+    comments: PropTypes.number.isRequired,
+    retweets: PropTypes.number.isRequired,
+    likes: PropTypes.number.isRequired,
 });
 
 Tweet.propTypes = {
-    tweet: TweetStructure,
-    addComment: PropTypes.func,
-    addRetweet: PropTypes.func,
-    addLike: PropTypes.func,
+    tweet: TweetStructure.isRequired,
+    addComment: PropTypes.func.isRequired,
+    addRetweet: PropTypes.func.isRequired,
+    addLike: PropTypes.func.isRequired,
 }
 
 export default Tweet;

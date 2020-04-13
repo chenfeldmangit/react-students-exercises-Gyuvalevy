@@ -8,8 +8,8 @@ import './css/twitter-basics.css';
 import './css/twitter-icons.css';
 
 class App extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { showLoading: true };
     }
 

@@ -4,7 +4,7 @@ import Tweet from "./Tweet";
 
 const TweetsList = ({tweets, tweetAddLike, tweetAddComment, tweetAddRetweet}) => {
     return (
-        <div id="homepageCenter" className="center-container">
+        <div id="feedPosts" className="feed-posts scroll">
             {
                 tweets.map(tweet =>
                     <Tweet

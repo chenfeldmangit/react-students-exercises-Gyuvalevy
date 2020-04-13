@@ -1,5 +1,5 @@
 import React from "react";
-// import '../../css/twitter-left-side.css';
+import PropTypes from 'prop-types';
 
 const Loading = ({show}) => {
     return (
@@ -16,3 +16,11 @@ const Loading = ({show}) => {
 };
 
 export default Loading;
+
+Loading.defaultProps = {
+    show: false,
+}
+
+Loading.propTypes = {
+    show: PropTypes.bool,
+}
