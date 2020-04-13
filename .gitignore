@@ -190,3 +190,7 @@ fabric.properties
 package-lock.json
 react-students-exercises-Gyuvalevy.iml
 
+
+*.css.map
+*.css
+

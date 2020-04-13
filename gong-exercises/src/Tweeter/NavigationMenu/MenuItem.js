@@ -1,5 +1,5 @@
 import React from "react";
-import '../../css/twitter-left-side.css';
+import '../../sass/twitter-left-side.sass';
 
 const MenuItem = (props) => {
     return (

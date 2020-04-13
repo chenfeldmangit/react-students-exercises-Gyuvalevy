@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import '../../css/twitter-left-side.css';
-import '../../css/twitter-center-side.css';
+import '../../sass/twitter-left-side.sass';
+import '../../sass/twitter-center-side.sass';
 import TweeterLocalStorage from "./../TweeterLocalStorage";
 import ProfilesLocalStorage from "../ProfilesLocalStorage";
 import HomePage from "./HomePage";

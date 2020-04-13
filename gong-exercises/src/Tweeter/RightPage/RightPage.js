@@ -1,5 +1,5 @@
 import React from "react";
-import '../../css/twitter-right-side.css';
+import '../../sass/twitter-right-side.sass';
 
 const RightPage = () => {
     return (
