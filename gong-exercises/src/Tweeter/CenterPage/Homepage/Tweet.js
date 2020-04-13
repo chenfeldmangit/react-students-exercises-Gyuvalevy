@@ -5,23 +5,24 @@ import TweetAction from "./TweetAction";
 class Tweet extends Component {
     constructor(props) {
         super(props);
-        this.state = {tweet: props.tweet};
+        this.state = { tweet: props.tweet };
     }
 
     render() {
-        const {profileImgSrc, profileName, profileMention, postTime, approved, postContent, comments, retweets, likes} = this.state.tweet;
+        const { postTime, postContent, comments, retweets, likes } = this.state.tweet;
+        const { profile } = this.props;
 
         return (
             <div className="feed-post">
                 <div>
-                    <img className="profile-picture" src={profileImgSrc} alt="profile"/>
+                    <img className="profile-picture" src={profile.imgSrc} alt="profile"/>
                 </div>
                 <div className="post">
                     <div className="post-information">
                         <div className="profile-information">
-                            <div className="profile-name">{profileName}</div>
-                            <div className={approved ? "approved" : "not-approved"}/>
-                            <div className="profile-mention">@{profileMention}  </div>
+                            <div className="profile-name">{profile.name}</div>
+                            <div className={profile.approved ? "approved" : "not-approved"}/>
+                            <div className="profile-mention">@{profile.mention}  </div>
                             <div className="post-tile post-time">{postTime}</div>
                         </div>
                         <div className="arrow-down icon-hover"/>
@@ -44,11 +45,15 @@ class Tweet extends Component {
     }
 }
 
-const TweetStructure = PropTypes.shape({
-    profileImgSrc: PropTypes.string.isRequired,
-    profileName: PropTypes.string.isRequired,
-    profileMention: PropTypes.string.isRequired,
+const Profile = PropTypes.shape({
+    imgSrc: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    mention: PropTypes.string.isRequired,
     approved: PropTypes.bool.isRequired,
+});
+
+const TweetStructure = PropTypes.shape({
+    profile: Profile.isRequired,
     postTime: PropTypes.string.isRequired,
     postContent: PropTypes.string.isRequired,
     comments: PropTypes.number.isRequired,

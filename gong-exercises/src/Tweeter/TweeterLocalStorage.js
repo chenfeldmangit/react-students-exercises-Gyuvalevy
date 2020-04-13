@@ -12,10 +12,7 @@ class TweeterLocalStorage {
         let initialTweets = [
             {
                 key: 1,
-                profileName: "Benny Gantz",
-                profileMention: "gantzbe",
-                approved: true,
-                profileImgSrc: 'https://pbs.twimg.com/profile_images/1156850474110345216/FWeRQirQ_bigger.jpg',
+                profileId: 2,
                 comments: 117,
                 retweets: 31,
                 likes: 300,
@@ -24,10 +21,7 @@ class TweeterLocalStorage {
             },
             {
                 key: 2,
-                profileName: "Yuval Levy",
-                profileMention: "yuvalevy",
-                approved: false,
-                profileImgSrc: 'https://lh3.googleusercontent.com/-gJS19so4rY4/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nB49lJKdInn1oTmsEQ5pA5HC8OlCw.CMID/s83-c/photo.jpg',
+                profileId: 1,
                 comments: 117,
                 retweets: 31,
                 likes: 300,

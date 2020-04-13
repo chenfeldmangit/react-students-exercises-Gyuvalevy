@@ -13,6 +13,7 @@ class ProfilesLocalStorage {
 
         const profilesInfo = [
             {
+                id: 1,
                 name: "Yuval Levy",
                 mention: "yuvalevy",
                 approved: false,
@@ -24,6 +25,7 @@ class ProfilesLocalStorage {
                 imgSrc: 'https://lh3.googleusercontent.com/-gJS19so4rY4/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nB49lJKdInn1oTmsEQ5pA5HC8OlCw.CMID/s83-c/photo.jpg',
             },
             {
+                id: 2,
                 name: "Benny Gantz",
                 approved: true,
                 mention: "gantzbe",
@@ -37,8 +39,12 @@ class ProfilesLocalStorage {
             }
         ];
 
-        localStorage.setItem(KEY_PROFILES, JSON.stringify(profilesInfo))
+        this.setProfiles(profilesInfo);
     };
+
+    static setProfiles(profilesInfo) {
+        localStorage.setItem(KEY_PROFILES, JSON.stringify(profilesInfo));
+    }
 
     static getProfiles = () => {
         let profiles = JSON.parse(localStorage.getItem(KEY_PROFILES));
@@ -47,7 +53,15 @@ class ProfilesLocalStorage {
     };
 
     static getCurrentProfile = () => {
+        if (!ProfilesLocalStorage.isLocalStorageExists())
+            ProfilesLocalStorage.populateLocalStorage()
         return ProfilesLocalStorage.getProfiles()[CURRENT_INDEX];
+    };
+
+    static getProfileById = (profileId) => {
+        const profiles = ProfilesLocalStorage.getProfiles();
+        let tweetIndex = profiles.findIndex(value => value.id === profileId);
+        return profiles[tweetIndex];
     };
 
     static switchProfile() {
@@ -57,9 +71,9 @@ class ProfilesLocalStorage {
     }
 
     static setCurrentProfile(profile) {
-        let profiles = JSON.parse(localStorage.getItem(KEY_PROFILES));
+        let profiles = ProfilesLocalStorage.getProfiles();
         profiles[CURRENT_INDEX] = profile;
-        localStorage.setItem(KEY_PROFILES, JSON.stringify(profiles));
+        this.setProfiles(profiles);
     };
 
     static getKeyProfiles = () => {

@@ -19,6 +19,10 @@ class CenterPage extends Component {
         this.state = {tweetsList: TweeterLocalStorage.getTweets()}
     }
 
+    getProfileInformation(profileId) {
+        return ProfilesLocalStorage.getProfileById(profileId);
+    }
+
     replaceTweet(newTweet) {
         TweeterLocalStorage.replaceTweetByKey(newTweet);
 
@@ -67,10 +71,7 @@ class CenterPage extends Component {
         let now = new Date();
         const newTweet = {
             key: Math.floor(Math.random() * 100000),
-            profileName: this.props.profile.name,
-            profileMention: this.props.profile.mention,
-            approved: this.props.profile.approved,
-            profileImgSrc: this.props.profile.imgSrc,
+            profileId: this.props.profile.id,
             comments: 0,
             retweets: 0,
             likes: 0,
@@ -85,6 +86,7 @@ class CenterPage extends Component {
         return () => (
             <HomePage
                 tweetsList={this.state.tweetsList}
+                getProfileInformation={this.getProfileInformation}
                 sendTweet={(content) => this.createTweet(content)}
                 deleteTweet={this.deleteTweet}
                 addLike={this.addLike}

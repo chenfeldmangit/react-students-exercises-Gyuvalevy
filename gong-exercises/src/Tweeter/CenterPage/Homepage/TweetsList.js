@@ -3,7 +3,15 @@ import '../../../sass/twitter-left-side.sass';
 import Tweet from "./Tweet";
 import PropTypes from "prop-types";
 
-const TweetsList = ({tweets, addLike, addComment, addRetweet, deleteTweet}) => {
+const TweetsList = ({tweets, getProfileInformation, addLike, addComment, addRetweet, deleteTweet}) => {
+    let profiles = {};
+
+    const getProfile = (profileId) => {
+        if (!profiles[profileId])
+            profiles[profileId] = getProfileInformation(profileId);
+        return profiles[profileId];
+    }
+
     return (
         <div id="feedPosts" className="feed-posts scroll">
             {
@@ -11,6 +19,7 @@ const TweetsList = ({tweets, addLike, addComment, addRetweet, deleteTweet}) => {
                     <Tweet
                         key={tweet.key}
                         tweet={tweet}
+                        profile={getProfile(tweet.profileId)}
                         deleteTweet={() => deleteTweet(tweet)}
                         addLike={() => addLike(tweet)}
                         addRetweet={() => addRetweet(tweet)}
