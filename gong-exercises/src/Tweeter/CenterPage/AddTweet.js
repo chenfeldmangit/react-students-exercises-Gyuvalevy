@@ -5,14 +5,24 @@ import PropTypes from "prop-types";
 class AddTweet extends Component {
     constructor(props) {
         super(props);
-        this.state = {content: ''};
+        this.state = {
+            content: '',
+            okToSend: false,
+        };
     }
 
     submitTweet = () => {
-        if (this.state.content) {
+        if (this.state.okToSend) {
             this.setState({content: ''});
             return this.props.sendTweet(this.state.content);
         }
+    }
+
+    onTextAreaChange = (event) => {
+        this.setState({
+            content: event.target.value,
+            okToSend: !!event.target.value && event.target.value.length >= 3
+        });
     }
 
     render() {
@@ -25,12 +35,16 @@ class AddTweet extends Component {
                             placeholder="What&apos;s happening"
                             rows="5"
                             value={this.state.content}
-                            onChange={(event => this.setState({content: event.target.value}))}
+                            onChange={this.onTextAreaChange}
                         />
                     </label>
                 </div>
                 <div>
-                    <button className="basic-button edit-profile-button" id="addTweetButton" onClick={this.submitTweet} >
+                    <button
+                        className="basic-button edit-profile-button"
+                        id="addTweetButton"
+                        onClick={this.submitTweet}
+                        disabled={!this.state.okToSend}>
                         Tweet
                     </button>
                 </div>
