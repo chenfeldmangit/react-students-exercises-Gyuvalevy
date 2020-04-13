@@ -4,6 +4,7 @@ import TweetsList from "./TweetsList";
 import AddTweet from "./AddTweet";
 import '../../css/twitter-center-side.css';
 import TweeterLocalStorage from "./../TweeterLocalStorage";
+import HomePage from "./HomePage";
 
 const profilesInfo = [
     {
@@ -104,17 +105,14 @@ class CenterPage extends Component {
     render() {
         return (
             <div id="centerPage" className="center-wrapper">
-                <div id="homepageCenter" className="center-container">
-                    <div className="title">Home</div>
-                    <AddTweet sendTweet={(content) => this.createTweet(content)}/>
-                    <TweetsList
-                        tweets={this.state.tweetsList}
-                        deleteTweet={this.deleteTweet}
-                        addLike={this.addLike}
-                        addRetweet={this.addRetweet}
-                        addComment={this.addComment}
-                    />
-                </div>
+                <HomePage
+                    tweetsList={this.state.tweetsList}
+                    sendTweet={(content) => this.createTweet(content)}
+                    deleteTweet={this.deleteTweet}
+                    addLike={this.addLike}
+                    addRetweet={this.addRetweet}
+                    addComment={this.addComment}
+                />
             </div>
         );
     }
