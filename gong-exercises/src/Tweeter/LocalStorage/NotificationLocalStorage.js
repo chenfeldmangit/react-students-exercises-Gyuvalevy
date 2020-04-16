@@ -27,17 +27,17 @@ class NotificationLocalStorage {
                 tweetId: 2,
                 key: 1,
                 action: NOTIFICATION_ACTION_TYPE_TWEET,
-                byId: 1,
+                byId: [1],
             },
             {
                 key: 2,
                 action: NOTIFICATION_ACTION_TYPE_LIKE,
-                byId: 1,
+                byId: [1],
             },
             {
                 key: 3,
                 action: NOTIFICATION_ACTION_TYPE_FOLLOWS,
-                byId: 1,
+                byId: [1],
             },
         ];
 

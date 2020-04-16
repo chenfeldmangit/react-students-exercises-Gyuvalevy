@@ -1,11 +1,13 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes, {arrayOf} from 'prop-types';
 import {NotificationActionAssets} from "../../Shapes/NotificationAction";
 import {NotificationStructure} from "../../Shapes/NotificationStructure";
 import {Profile} from "../../Shapes/Profile";
 
-const Notification = ({notification, byProfile, content}) => {
+const Notification = ({notification, byProfiles, content}) => {
     const notificationAsset = NotificationActionAssets[notification.action];
+
+    const names = byProfiles.map((profile) => profile.name);
 
     return (
         <div className="notification-feed">
@@ -14,11 +16,14 @@ const Notification = ({notification, byProfile, content}) => {
             </div>
             <div className="notification">
                 <div className="pictures">
-                    <img className="profile-picture" src={byProfile.imgSrc} alt="notification-type"/>
-                    <img className="profile-picture" src={byProfile.imgSrc} alt="notification-type"/>
+                    {
+                        byProfiles.map(
+                            (profile) =>
+                                (<img className="profile-picture" src={profile.imgSrc} alt="notification-type" key={profile.id} />))
+                    }
                 </div>
                 <div className="text">
-                    {notificationAsset.renderText(byProfile.name)}
+                    {notificationAsset.renderText(names)}
                 </div>
                 {
                     content
@@ -33,7 +38,7 @@ const Notification = ({notification, byProfile, content}) => {
 
 Notification.propTypes = {
     notification: NotificationStructure.isRequired,
-    byProfile: Profile.isRequired,
+    byProfiles: arrayOf(Profile.isRequired),
     content: PropTypes.string,
 }
 

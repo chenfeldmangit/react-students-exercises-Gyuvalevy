@@ -13,6 +13,10 @@ const NotificationList = ({notifications, getProfileInformation, getTweetContent
         return profiles[profileId];
     }
 
+    const getProfiles = (profilesId) => {
+        return profilesId.map((profileId) => getProfile(profileId));
+    }
+
     return (
         <div className="notifications scroll">
             {
@@ -20,7 +24,7 @@ const NotificationList = ({notifications, getProfileInformation, getTweetContent
                     <Notification
                         key={notification.key}
                         notification={notification}
-                        byProfile={getProfile(notification.byId)}
+                        byProfiles={getProfiles(notification.byId)}
                         content={notification.tweetId ? getTweetContent(notification.tweetId) : ''}
                     />)
             }
