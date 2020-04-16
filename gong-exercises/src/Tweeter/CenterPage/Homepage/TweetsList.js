@@ -3,7 +3,7 @@ import '../../../sass/twitter-left-side.sass';
 import Tweet from "./Tweet";
 import PropTypes from "prop-types";
 
-const TweetsList = ({tweets, getProfileInformation, addLike, addComment, addRetweet, deleteTweet}) => {
+const TweetsList = ({tweets, getProfileInformation, replaceTweet, deleteTweet}) => {
     let profiles = {};
 
     const getProfile = (profileId) => {
@@ -20,10 +20,8 @@ const TweetsList = ({tweets, getProfileInformation, addLike, addComment, addRetw
                         key={tweet.key}
                         tweet={tweet}
                         profile={getProfile(tweet.profileId)}
+                        replaceTweet={replaceTweet}
                         deleteTweet={() => deleteTweet(tweet)}
-                        addLike={() => addLike(tweet)}
-                        addRetweet={() => addRetweet(tweet)}
-                        addComment={() => addComment(tweet)}
                     />)
             }
         </div>
@@ -31,10 +29,8 @@ const TweetsList = ({tweets, getProfileInformation, addLike, addComment, addRetw
 };
 
 TweetsList.propTypes = {
+    replaceTweet: PropTypes.func.isRequired,
     deleteTweet: PropTypes.func.isRequired,
-    addLike: PropTypes.func.isRequired,
-    addComment: PropTypes.func.isRequired,
-    addRetweet: PropTypes.func.isRequired,
 }
 
 export default TweetsList;

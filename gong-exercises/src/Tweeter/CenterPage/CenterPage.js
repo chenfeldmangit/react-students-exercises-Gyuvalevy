@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import {Switch, Route} from 'react-router-dom';
 import '../../sass/twitter-left-side.sass';
 import '../../sass/twitter-center-side.sass';
@@ -8,70 +8,52 @@ import HomePage from "./Homepage/HomePage";
 import ProfilePage from "./Profile/ProfilePage";
 import EditProfilePage from "./Profile/EditProfilePage";
 
-class CenterPage extends Component {
-    constructor(props) {
-        super(props);
-        this.props.changeLoading(false);
+const CenterPage = (props) => {
+    const [tweetsList, setTweetsList] = useState(TweeterLocalStorage.getTweets());
 
+    useEffect(() => {
         ProfilesLocalStorage.populateLocalStorage();
         TweeterLocalStorage.populateLocalStorage();
+    }, []);
 
-        this.state = {tweetsList: TweeterLocalStorage.getTweets()}
-    }
+    useEffect(() => {
+        props.changeLoading(false);
+    }, [tweetsList]);
 
-    getProfileInformation(profileId) {
-        return ProfilesLocalStorage.getProfileById(profileId);
-    }
+    const getProfileInformation = (profileId) => ProfilesLocalStorage.getProfileById(profileId);
 
-    replaceTweet(newTweet) {
+    const replaceTweet = (newTweet) => {
+        props.changeLoading(true);
         TweeterLocalStorage.replaceTweetByKey(newTweet);
 
-        const newTweets = this.state.tweetsList;
+        const newTweets = tweetsList.slice();
         const tweetIndex = newTweets.findIndex(value => value.key === newTweet.key);
         newTweets[tweetIndex] = newTweet;
-        this.setState({tweetsList: newTweets});
-    }
+        setTweetsList(newTweets);
+    };
 
-    appendTweet(newTweet) {
+    const appendTweet = (newTweet) => {
         TweeterLocalStorage.appendTweet(newTweet);
 
-        const tweets = this.state.tweetsList;
+        const tweets = tweetsList.slice();
         tweets.splice(0, 0, newTweet);
-        this.setState({tweetsList: tweets});
-    }
+        setTweetsList(tweets);
+    };
 
-    deleteTweet = (tweet) => {
+    const deleteTweet = (tweet) => {
         TweeterLocalStorage.removeTweet(tweet);
-        const tweets = this.state.tweetsList;
+
+        const tweets = tweetsList.slice();
         let index = tweets.findIndex(value => value.key === tweet.key);
         tweets.splice(index, 1);
+        setTweetsList(tweets);
+    };
 
-        this.setState({tweetsList: tweets});
-    }
-
-    addLike = (tweet) => {
-        const newTweet = tweet;
-        newTweet.likes++;
-        this.replaceTweet(newTweet);
-    }
-
-    addComment = (tweet) => {
-        const newTweet = tweet;
-        newTweet.comments++;
-        this.replaceTweet(newTweet);
-    }
-
-    addRetweet = (tweet) => {
-        const newTweet = tweet;
-        newTweet.retweets++;
-        this.replaceTweet(newTweet);
-    }
-
-    createTweet = (content) => {
+    const createTweet = (content) => {
         let now = new Date();
         const newTweet = {
             key: Math.floor(Math.random() * 100000),
-            profileId: this.props.profile.id,
+            profileId: props.profile.id,
             comments: 0,
             retweets: 0,
             likes: 0,
@@ -79,46 +61,43 @@ class CenterPage extends Component {
             postContent: content,
         };
 
-        this.appendTweet(newTweet);
-    }
+        appendTweet(newTweet);
+    };
 
-    getHomePageComponent() {
+    const getHomePageComponent = () => {
         return () => (
             <HomePage
-                tweetsList={this.state.tweetsList}
-                getProfileInformation={this.getProfileInformation}
-                sendTweet={(content) => this.createTweet(content)}
-                deleteTweet={this.deleteTweet}
-                addLike={this.addLike}
-                addRetweet={this.addRetweet}
-                addComment={this.addComment}
+                tweetsList={tweetsList}
+                getProfileInformation={getProfileInformation}
+                sendTweet={(content) => createTweet(content)}
+                replaceTweet={replaceTweet}
+                deleteTweet={deleteTweet}
             />
         );
-    }
+    };
 
-    getProfileComponent() {
+    const getProfileComponent = () => {
         return () => (
-            <ProfilePage profile={this.props.profile}/>
+            <ProfilePage profile={props.profile}/>
         );
-    }
+    };
 
-    getEditProfileComponent() {
+    const getEditProfileComponent = () => {
         return () => (
-            <EditProfilePage profile={this.props.profile} save={this.props.saveProfile}/>
+            <EditProfilePage profile={props.profile} save={props.saveProfile}/>
         );
-    }
+    };
 
-    render() {
-        return (
-                <div id="centerPage" className="center-wrapper">
-                    <Switch>
-                        <Route path="/" exact component={this.getHomePageComponent()}/>
-                        <Route path="/profile" exact component={this.getProfileComponent()}/>
-                        <Route path="/profile/edit" component={this.getEditProfileComponent()}/>
-                    </Switch>
-                </div>
-        );
-    }
-}
+    return props.show
+        ? (<div id="centerPage" className="center-wrapper">
+                <Switch>
+                    <Route path="/" exact component={getHomePageComponent()}/>
+                    <Route path="/profile" exact component={getProfileComponent()}/>
+                    <Route path="/profile/edit" component={getEditProfileComponent()}/>
+                </Switch>
+            </div>
+        )
+        : (<></>);
+};
 
 export default CenterPage;

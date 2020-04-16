@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const EditBox = ({wrapperClassName, wrapperId, boxId, value, placeholder, iconClass, onChangeFunc}) => {
     return (
         <div className={`basic-input-wrapper ${wrapperClassName}`} id={wrapperId}>
-            <i className={iconClass}/>
+            { iconClass && (<i className={iconClass}/>) }
             <label>
                 <input className="basic-input" id={boxId} placeholder={placeholder} value={value} onChange={onChangeFunc} />
             </label>
@@ -27,7 +27,6 @@ EditBox.defaultProps = {
     placeholder: 'Text Here...',
     wrapperClassName: '',
     wrapperId: '',
-    iconClass: '',
     value: '',
 }
 

@@ -18,9 +18,7 @@ class App extends Component {
         };
     }
 
-    changeLoading = (show) => {
-        this.setState({showLoading: show});
-    }
+    changeLoading = (show) => this.setState({showLoading: show})
 
     switchProfile = () => {
         ProfilesLocalStorage.switchProfile();
@@ -42,9 +40,9 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div className="main-wrapper">
-                    <NavigationMenu switchProfile={this.switchProfile} profile={this.state.profile}/>
                     <Loading show={this.state.showLoading}/>
-                    <CenterPage changeLoading={this.changeLoading} profile={this.state.profile} saveProfile={this.changeCurrentProfile} />
+                    <NavigationMenu switchProfile={this.switchProfile} profile={this.state.profile}/>
+                    <CenterPage show={!this.state.showLoading} changeLoading={this.changeLoading} profile={this.state.profile} saveProfile={this.changeCurrentProfile} />
                     <RightPage/>
                 </div>
             </BrowserRouter>
