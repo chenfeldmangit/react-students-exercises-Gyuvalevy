@@ -2,14 +2,15 @@ import {
     NOTIFICATION_ACTION_TYPE_FOLLOWS,
     NOTIFICATION_ACTION_TYPE_LIKE,
     NOTIFICATION_ACTION_TYPE_TWEET,
-} from "./Shapes/NotificationAction";
+} from "../Shapes/NotificationAction";
 import LocalStorageBasics from "./LocalStorageBasics";
 
 const KEY = 'notifications';
 
-const getNotificationsFunction = LocalStorageBasics.getItems(KEY);
-const appendNotificationsFunction = LocalStorageBasics.appendItems(KEY);
-const removeNotificationsFunction = LocalStorageBasics.removeItem(KEY);
+const getAll = LocalStorageBasics.getItems(KEY);
+const setAll = LocalStorageBasics.setItems(KEY);
+const append = LocalStorageBasics.appendItems(KEY);
+const remove = LocalStorageBasics.removeItem(KEY);
 
 class NotificationLocalStorage {
 
@@ -40,15 +41,15 @@ class NotificationLocalStorage {
             },
         ]
 
-        localStorage.setItem(KEY, JSON.stringify(initialNotifications))
+        setAll(initialNotifications);
     };
 
     // append to start
-    static appendNotifications = (newNotification) => appendNotificationsFunction(newNotification);
+    static appendNotifications = (newNotification) => append(newNotification);
 
-    static getNotifications = () => getNotificationsFunction();
+    static getNotifications = () => getAll();
 
-    static removeNotification = (notification) => removeNotificationsFunction(notification);
+    static removeNotification = (notification) => remove(notification);
 
     static getKeyTweets = () => {
         return KEY

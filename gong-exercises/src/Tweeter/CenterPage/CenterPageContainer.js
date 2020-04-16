@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import '../../scss/twitter-left-side.scss';
 import '../../scss/twitter-center-side.scss';
-import TweeterLocalStorage from "./../TweeterLocalStorage";
-import ProfilesLocalStorage from "../ProfilesLocalStorage";
+import TweeterLocalStorage from "./../Stores/TweeterLocalStorage";
+import ProfilesLocalStorage from "../Stores/ProfilesLocalStorage";
 import NewsFeed from "./NewsFeed/NewsFeed";
 import ProfilePage from "./Profile/ProfilePage";
 import EditProfilePage from "./Profile/EditProfilePage";
 import CenterPage from "./CenterPage";
 import NotificationListContainer from "./Notification/NotificationListContainer";
-import NotificationLocalStorage from "../NotificationLocalStorage";
+import NotificationLocalStorage from "../Stores/NotificationLocalStorage";
 
 const CenterPageContainer = (props) => {
     const [tweetsList, setTweetsList] = useState([]);
@@ -29,7 +29,7 @@ const CenterPageContainer = (props) => {
 
     const getProfileInformation = (profileId) => ProfilesLocalStorage.getProfileById(profileId);
 
-    const getTweetContent = (tweetId) => TweeterLocalStorage.getTweetByKey(tweetId).postContent;
+    const getTweetContent = (tweetKey) => tweetsList.find(value => value.key === tweetKey);
 
     const replaceTweet = (newTweet) => {
         props.changeLoading(true);

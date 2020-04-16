@@ -1,6 +1,12 @@
-const KEY_PROFILES = 'profiles';
+import LocalStorageBasics from "./LocalStorageBasics";
+
+const KEY = 'profiles';
 let CURRENT_INDEX = 0;
 let PROFILES_COUNT = 0;
+
+const getAll = LocalStorageBasics.getItems(KEY);
+const getById = LocalStorageBasics.getItemById(KEY);
+const setAll = LocalStorageBasics.setItems(KEY);
 
 class ProfilesLocalStorage {
     static isLocalStorageExists = () => {
@@ -39,29 +45,17 @@ class ProfilesLocalStorage {
             }
         ];
 
-        this.setProfiles(profilesInfo);
+        setAll(profilesInfo);
     };
 
-    static setProfiles(profilesInfo) {
-        localStorage.setItem(KEY_PROFILES, JSON.stringify(profilesInfo));
-    }
+    static getProfiles = () => getAll();
 
-    static getProfiles = () => {
-        let profiles = JSON.parse(localStorage.getItem(KEY_PROFILES));
-        PROFILES_COUNT = profiles ? profiles.length : 0;
-        return profiles;
-    };
+    static getProfileById = (profileId) => getById(profileId);
 
     static getCurrentProfile = () => {
         if (!ProfilesLocalStorage.isLocalStorageExists())
             ProfilesLocalStorage.populateLocalStorage()
         return ProfilesLocalStorage.getProfiles()[CURRENT_INDEX];
-    };
-
-    static getProfileById = (profileId) => {
-        const profiles = ProfilesLocalStorage.getProfiles();
-        let tweetIndex = profiles.findIndex(value => value.id === profileId);
-        return profiles[tweetIndex];
     };
 
     static switchProfile() {
@@ -73,11 +67,11 @@ class ProfilesLocalStorage {
     static setCurrentProfile(profile) {
         let profiles = ProfilesLocalStorage.getProfiles();
         profiles[CURRENT_INDEX] = profile;
-        this.setProfiles(profiles);
+        setAll(profiles);
     };
 
     static getKeyProfiles = () => {
-        return KEY_PROFILES
+        return KEY
     };
 }
 

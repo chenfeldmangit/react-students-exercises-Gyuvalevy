@@ -6,7 +6,7 @@ import RightPage from "./Tweeter/RightPage/RightPage";
 import './scss/twitter.scss';
 import './scss/twitter-basics.scss';
 import './scss/twitter-icons.scss';
-import ProfilesLocalStorage from "./Tweeter/ProfilesLocalStorage";
+import ProfilesLocalStorage from "./Tweeter/Stores/ProfilesLocalStorage";
 import {BrowserRouter} from "react-router-dom";
 
 class App extends Component {
