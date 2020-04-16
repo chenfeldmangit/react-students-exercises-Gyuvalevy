@@ -4,7 +4,7 @@ import AddTweet from "./AddTweet";
 import '../../../sass/twitter-center-side.sass';
 import '../../../sass/twitter-left-side.sass';
 
-const HomePage = ({tweetsList, getProfileInformation, sendTweet, replaceTweet, deleteTweet}) => {
+const NewsFeed = ({tweetsList, getProfileInformation, sendTweet, replaceTweet, deleteTweet}) => {
     return (
         <div id="homepageCenter" className="center-container">
             <div className="title">Home</div>
@@ -19,4 +19,4 @@ const HomePage = ({tweetsList, getProfileInformation, sendTweet, replaceTweet, d
     );
 };
 
-export default HomePage;
+export default NewsFeed;

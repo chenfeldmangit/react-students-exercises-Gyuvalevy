@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import '../../../sass/twitter-add-tweet.sass';
+import Button from "../../Common/Button";
 
 class AddTweet extends Component {
     constructor(props) {
@@ -40,13 +41,13 @@ class AddTweet extends Component {
                     </label>
                 </div>
                 <div>
-                    <button
+                    <Button
+                        text="Tweet"
                         className="basic-button edit-profile-button"
                         id="addTweetButton"
-                        onClick={this.submitTweet}
-                        disabled={!this.state.okToSend}>
-                        Tweet
-                    </button>
+                        onChangeFunc={this.submitTweet}
+                        disabled={!this.state.okToSend}
+                    />
                 </div>
                 {/* <div class="post-actions">*/}
                 {/*         <div class="action"><i class="small-icon icon-space-pad speech-bubble icon-hover"></i><span>117</span></div>*/}

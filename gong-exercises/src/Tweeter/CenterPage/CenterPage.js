@@ -4,7 +4,7 @@ import '../../sass/twitter-left-side.sass';
 import '../../sass/twitter-center-side.sass';
 import TweeterLocalStorage from "./../TweeterLocalStorage";
 import ProfilesLocalStorage from "../ProfilesLocalStorage";
-import HomePage from "./Homepage/HomePage";
+import NewsFeed from "./NewsFeed/NewsFeed";
 import ProfilePage from "./Profile/ProfilePage";
 import EditProfilePage from "./Profile/EditProfilePage";
 
@@ -64,9 +64,9 @@ const CenterPage = (props) => {
         appendTweet(newTweet);
     };
 
-    const getHomePageComponent = () => {
+    const renderNewsFeedPageComponent = () => {
         return () => (
-            <HomePage
+            <NewsFeed
                 tweetsList={tweetsList}
                 getProfileInformation={getProfileInformation}
                 sendTweet={(content) => createTweet(content)}
@@ -76,13 +76,13 @@ const CenterPage = (props) => {
         );
     };
 
-    const getProfileComponent = () => {
+    const renderProfileComponent = () => {
         return () => (
             <ProfilePage profile={props.profile}/>
         );
     };
 
-    const getEditProfileComponent = () => {
+    const renderEditProfileComponent = () => {
         return () => (
             <EditProfilePage profile={props.profile} save={props.saveProfile}/>
         );
@@ -91,9 +91,9 @@ const CenterPage = (props) => {
     return props.show
         ? (<div id="centerPage" className="center-wrapper">
                 <Switch>
-                    <Route path="/" exact component={getHomePageComponent()}/>
-                    <Route path="/profile" exact component={getProfileComponent()}/>
-                    <Route path="/profile/edit" component={getEditProfileComponent()}/>
+                    <Route path="/" exact component={renderNewsFeedPageComponent()}/>
+                    <Route path="/profile" exact component={renderProfileComponent()}/>
+                    <Route path="/profile/edit" component={renderEditProfileComponent()}/>
                 </Switch>
             </div>
         )
