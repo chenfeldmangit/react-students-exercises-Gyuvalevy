@@ -37,7 +37,7 @@ class TweeterLocalStorage {
                 postTime: '2h',
                 postContent: 'HALAS Corona! מה יהיה!?!',
             },
-        ]
+        ];
 
         setAll(initialTweets);
     };

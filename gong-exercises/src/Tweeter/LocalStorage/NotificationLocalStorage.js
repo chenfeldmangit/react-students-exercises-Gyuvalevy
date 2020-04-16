@@ -39,7 +39,7 @@ class NotificationLocalStorage {
                 action: NOTIFICATION_ACTION_TYPE_FOLLOWS,
                 byId: 1,
             },
-        ]
+        ];
 
         setAll(initialNotifications);
     };

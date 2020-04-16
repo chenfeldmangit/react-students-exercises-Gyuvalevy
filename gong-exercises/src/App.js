@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import NavigationMenu from "./Tweeter/NavigationMenu/NavigationMenu";
 import CenterPageContainer from "./Tweeter/CenterPage/CenterPageContainer";
 import Loading from "./Tweeter/Loading/Loading";
@@ -6,49 +6,34 @@ import RightPage from "./Tweeter/RightPage/RightPage";
 import './scss/twitter.scss';
 import './scss/twitter-basics.scss';
 import './scss/twitter-icons.scss';
-import ProfilesLocalStorage from "./Tweeter/Stores/ProfilesLocalStorage";
 import {BrowserRouter} from "react-router-dom";
+import {useCurrentProfile} from "./Tweeter/Stores/ProfileStore";
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showLoading: true,
-            profile: ProfilesLocalStorage.getCurrentProfile(),
-        };
-    }
+const App = () => {
+    const [currentProfile, setCurrentProfile, switchProfile] = useCurrentProfile();
+    const [showLoading, setShowLoading] = useState(true);
 
-    changeLoading = (show) => this.setState({showLoading: show})
+    const changeCurrentProfile = (profileNewDetails) => {
 
-    switchProfile = () => {
-        ProfilesLocalStorage.switchProfile();
-        this.setState({profile: ProfilesLocalStorage.getCurrentProfile()});
-    }
-
-    changeCurrentProfile = (profileNewDetails) => {
-
-        const changedProfile = this.state.profile;
+        const changedProfile = currentProfile;
         changedProfile.name = profileNewDetails.name;
         changedProfile.mention = profileNewDetails.mention;
         changedProfile.description = profileNewDetails.description;
 
-        ProfilesLocalStorage.setCurrentProfile(changedProfile);
-        this.setState({profile: ProfilesLocalStorage.getCurrentProfile()});
+        setCurrentProfile(changedProfile);
     }
 
-    render() {
-        return (
-            <BrowserRouter>
-                <div className="main-wrapper">
-                    <Loading show={this.state.showLoading}/>
-                    <NavigationMenu switchProfile={this.switchProfile} profile={this.state.profile}/>
-                    <CenterPageContainer show={!this.state.showLoading} changeLoading={this.changeLoading}
-                                         profile={this.state.profile} saveProfile={this.changeCurrentProfile}/>
-                    <RightPage/>
-                </div>
-            </BrowserRouter>
-        );
-    }
+    return (
+        <BrowserRouter>
+            <div className="main-wrapper">
+                <Loading show={showLoading}/>
+                <NavigationMenu switchProfile={switchProfile} profile={currentProfile}/>
+                <CenterPageContainer show={!showLoading} changeLoading={setShowLoading}
+                                     profile={currentProfile} saveProfile={changeCurrentProfile}/>
+                <RightPage/>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

@@ -1,62 +1,27 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import '../../scss/twitter-left-side.scss';
 import '../../scss/twitter-center-side.scss';
-import TweeterLocalStorage from "./../Stores/TweeterLocalStorage";
-import ProfilesLocalStorage from "../Stores/ProfilesLocalStorage";
 import NewsFeed from "./NewsFeed/NewsFeed";
 import ProfilePage from "./Profile/ProfilePage";
 import EditProfilePage from "./Profile/EditProfilePage";
 import CenterPage from "./CenterPage";
 import NotificationListContainer from "./Notification/NotificationListContainer";
-import NotificationLocalStorage from "../Stores/NotificationLocalStorage";
+import {useNotifications} from "../Stores/NotificationStore";
+import {useProfiles} from "../Stores/ProfileStore";
+import {useTweets} from "../Stores/TweetStore";
 
 const CenterPageContainer = (props) => {
-    const [tweetsList, setTweetsList] = useState([]);
-    const [notificationsList, setNotificationsList] = useState([]);
+    const [notificationsList] = useNotifications();
+    const [tweets, getTweetByKey, appendTweet, replaceTweetByKey, removeTweet] = useTweets();
 
-    useEffect(() => {
-        ProfilesLocalStorage.populateLocalStorage();
-        TweeterLocalStorage.populateLocalStorage();
-        NotificationLocalStorage.populateLocalStorage();
-
-        setTweetsList(TweeterLocalStorage.getTweets());
-        setNotificationsList(NotificationLocalStorage.getNotifications());
-    }, []);
+    // eslint-disable-next-line no-unused-vars
+    const [profiles, setProfiles, getProfileById] = useProfiles();
 
     useEffect(() => {
         props.changeLoading(false);
-    }, [tweetsList]);
+    }, [tweets]);
 
-    const getProfileInformation = (profileId) => ProfilesLocalStorage.getProfileById(profileId);
-
-    const getTweetContent = (tweetKey) => tweetsList.find(value => value.key === tweetKey);
-
-    const replaceTweet = (newTweet) => {
-        props.changeLoading(true);
-        TweeterLocalStorage.replaceTweetByKey(newTweet);
-
-        const newTweets = tweetsList.slice();
-        const tweetIndex = newTweets.findIndex(value => value.key === newTweet.key);
-        newTweets[tweetIndex] = newTweet;
-        setTweetsList(newTweets);
-    };
-
-    const appendTweet = (newTweet) => {
-        TweeterLocalStorage.appendTweet(newTweet);
-
-        const tweets = tweetsList.slice();
-        tweets.splice(0, 0, newTweet);
-        setTweetsList(tweets);
-    };
-
-    const deleteTweet = (tweet) => {
-        TweeterLocalStorage.removeTweet(tweet);
-
-        const tweets = tweetsList.slice();
-        let index = tweets.findIndex(value => value.key === tweet.key);
-        tweets.splice(index, 1);
-        setTweetsList(tweets);
-    };
+    const getTweetContent = (tweetKey) => getTweetByKey(tweetKey).postContent;
 
     const createTweet = (content) => {
         let now = new Date();
@@ -76,11 +41,11 @@ const CenterPageContainer = (props) => {
     const renderNewsFeedPageComponent = () => {
         return () => (
             <NewsFeed
-                tweetsList={tweetsList}
-                getProfileInformation={getProfileInformation}
+                tweetsList={tweets}
+                getProfileInformation={getProfileById}
                 sendTweet={(content) => createTweet(content)}
-                replaceTweet={replaceTweet}
-                deleteTweet={deleteTweet}
+                replaceTweet={replaceTweetByKey}
+                deleteTweet={removeTweet}
             />
         );
     };
@@ -101,7 +66,7 @@ const CenterPageContainer = (props) => {
         return () => (
             <NotificationListContainer
                 notifications={notificationsList}
-                getProfileInformation={getProfileInformation}
+                getProfileInformation={getProfileById}
                 getTweetContent={getTweetContent}
             />
         );
