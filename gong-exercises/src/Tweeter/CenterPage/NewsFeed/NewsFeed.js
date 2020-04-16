@@ -1,8 +1,8 @@
 import React from "react";
 import TweetsList from "./TweetsList";
 import AddTweet from "./AddTweet";
-import '../../../sass/twitter-center-side.sass';
-import '../../../sass/twitter-left-side.sass';
+import '../../../scss/twitter-center-side.scss';
+import '../../../scss/twitter-left-side.scss';
 
 const NewsFeed = ({tweetsList, getProfileInformation, sendTweet, replaceTweet, deleteTweet}) => {
     return (

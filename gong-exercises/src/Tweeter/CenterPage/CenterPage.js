@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Switch, Route} from 'react-router-dom';
-import '../../sass/twitter-left-side.sass';
-import '../../sass/twitter-center-side.sass';
+import '../../scss/twitter-left-side.scss';
+import '../../scss/twitter-center-side.scss';
 import TweeterLocalStorage from "./../TweeterLocalStorage";
 import ProfilesLocalStorage from "../ProfilesLocalStorage";
 import NewsFeed from "./NewsFeed/NewsFeed";

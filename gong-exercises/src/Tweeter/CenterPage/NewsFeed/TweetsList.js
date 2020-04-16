@@ -1,5 +1,5 @@
 import React from "react";
-import '../../../sass/twitter-left-side.sass';
+import '../../../scss/twitter-left-side.scss';
 import Tweet from "./Tweet";
 import PropTypes from "prop-types";
 

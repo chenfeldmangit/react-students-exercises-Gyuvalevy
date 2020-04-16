@@ -3,9 +3,9 @@ import NavigationMenu from "./Tweeter/NavigationMenu/NavigationMenu";
 import CenterPage from "./Tweeter/CenterPage/CenterPage";
 import Loading from "./Tweeter/Loading/Loading";
 import RightPage from "./Tweeter/RightPage/RightPage";
-import './sass/twitter.sass';
-import './sass/twitter-basics.sass';
-import './sass/twitter-icons.sass';
+import './scss/twitter.scss';
+import './scss/twitter-basics.scss';
+import './scss/twitter-icons.scss';
 import ProfilesLocalStorage from "./Tweeter/ProfilesLocalStorage";
 import {BrowserRouter} from "react-router-dom";
 

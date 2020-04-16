@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import '../../../sass/twitter-left-side.sass';
-import '../../../sass/twitter-center-side.sass';
+import '../../../scss/twitter-left-side.scss';
+import '../../../scss/twitter-center-side.scss';
 import {Link} from "react-router-dom";
 
 const Follow = ({iconClass, link}) => {

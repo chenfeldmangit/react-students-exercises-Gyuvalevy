@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MenuItem from "./MenuItem";
-import '../../sass/twitter-left-side.sass';
+import '../../scss/twitter-left-side.scss';
 
 class NavigationMenu extends Component {
     render() {
