@@ -1,0 +1,35 @@
+.notifications {
+
+  .notification-feed {
+    padding: 10px;
+    display: flex;
+
+    .notification {
+      margin-left: 10px;
+      flex-grow: 1;
+
+      .pictures {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+
+        > img {
+          padding: 0 5px;
+        }
+
+      }
+
+      .text .by-name {
+        font-weight: bold;
+      }
+
+      .content {
+        margin: 10px;
+        color: grey;
+      }
+    }
+
+    border: 1px solid rgb(230, 236, 240);
+  }
+
+}

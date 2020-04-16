@@ -6,7 +6,7 @@ import '../../../scss/twitter-left-side.scss';
 
 const NewsFeed = ({tweetsList, getProfileInformation, sendTweet, replaceTweet, deleteTweet}) => {
     return (
-        <div id="homepageCenter" className="center-container">
+        <div className="center-container">
             <div className="title">Home</div>
             <AddTweet sendTweet={sendTweet}/>
             <TweetsList

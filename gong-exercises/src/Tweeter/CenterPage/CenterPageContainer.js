@@ -7,13 +7,20 @@ import NewsFeed from "./NewsFeed/NewsFeed";
 import ProfilePage from "./Profile/ProfilePage";
 import EditProfilePage from "./Profile/EditProfilePage";
 import CenterPage from "./CenterPage";
+import NotificationListContainer from "./Notification/NotificationListContainer";
+import NotificationLocalStorage from "../NotificationLocalStorage";
 
 const CenterPageContainer = (props) => {
-    const [tweetsList, setTweetsList] = useState(TweeterLocalStorage.getTweets());
+    const [tweetsList, setTweetsList] = useState([]);
+    const [notificationsList, setNotificationsList] = useState([]);
 
     useEffect(() => {
         ProfilesLocalStorage.populateLocalStorage();
         TweeterLocalStorage.populateLocalStorage();
+        NotificationLocalStorage.populateLocalStorage();
+
+        setTweetsList(TweeterLocalStorage.getTweets());
+        setNotificationsList(NotificationLocalStorage.getNotifications());
     }, []);
 
     useEffect(() => {
@@ -21,6 +28,8 @@ const CenterPageContainer = (props) => {
     }, [tweetsList]);
 
     const getProfileInformation = (profileId) => ProfilesLocalStorage.getProfileById(profileId);
+
+    const getTweetContent = (tweetId) => TweeterLocalStorage.getTweetByKey(tweetId).postContent;
 
     const replaceTweet = (newTweet) => {
         props.changeLoading(true);
@@ -88,11 +97,22 @@ const CenterPageContainer = (props) => {
         );
     };
 
+    const renderNotificationListComponent = () => {
+        return () => (
+            <NotificationListContainer
+                notifications={notificationsList}
+                getProfileInformation={getProfileInformation}
+                getTweetContent={getTweetContent}
+            />
+        );
+    };
+
     return props.show
         ? (<CenterPage
                 renderEditProfileComponent={renderEditProfileComponent}
                 renderNewsFeedPageComponent={renderNewsFeedPageComponent}
                 renderProfileComponent={renderProfileComponent}
+                renderNotificationListComponent={renderNotificationListComponent}
             />
         )
         : (<></>);

@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import '../../../scss/twitter-left-side.scss';
 import '../../../scss/twitter-center-side.scss';
 import {Link} from "react-router-dom";
 import Button from "../../Common/Button";
+import {Profile} from "../../Shapes/Profile";
 
 const Follow = ({iconClass, link}) => {
     return (
@@ -46,18 +46,6 @@ const ProfilePage = ({profile}) => {
         </div>
     )
 };
-
-const Profile = PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    mention: PropTypes.string.isRequired,
-    approved: PropTypes.bool.isRequired,
-    description: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    homelink: PropTypes.string.isRequired,
-    following: PropTypes.number.isRequired,
-    followers: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-})
 
 ProfilePage.propTypes = {
     profile: Profile.isRequired,

@@ -13,7 +13,7 @@ const TweetsList = ({tweets, getProfileInformation, replaceTweet, deleteTweet}) 
     }
 
     return (
-        <div id="feedPosts" className="feed-posts scroll">
+        <div className="feed-posts scroll">
             {
                 tweets.map(tweet =>
                     <Tweet
@@ -29,6 +29,7 @@ const TweetsList = ({tweets, getProfileInformation, replaceTweet, deleteTweet}) 
 };
 
 TweetsList.propTypes = {
+    getProfileInformation: PropTypes.func,
     replaceTweet: PropTypes.func.isRequired,
     deleteTweet: PropTypes.func.isRequired,
 }

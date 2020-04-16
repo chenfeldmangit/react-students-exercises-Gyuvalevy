@@ -44,6 +44,12 @@ class TweeterLocalStorage {
         return JSON.parse(localStorage.getItem(KEY_TWEETS));
     };
 
+    static getTweetByKey = (tweetId) => {
+        const profiles = TweeterLocalStorage.getTweets();
+        let tweetIndex = profiles.findIndex(value => value.key === tweetId);
+        return profiles[tweetIndex];
+    };
+
     static replaceTweetByKey = (tweet) => {
         let tweets = JSON.parse(localStorage.getItem(KEY_TWEETS));
         let tweetIndex = tweets.findIndex(value => value.key === tweet.key);
