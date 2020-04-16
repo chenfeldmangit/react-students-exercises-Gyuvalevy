@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../../../scss/twitter-left-side.scss';
 import '../../../scss/twitter-center-side.scss';
 import {Link} from "react-router-dom";
+import Button from "../../Common/Button";
 
 const Follow = ({iconClass, link}) => {
     return (
@@ -19,7 +20,7 @@ const ProfilePage = ({profile}) => {
             <div className="profile-title">
                 <div className="title">Profile</div>
                 <Link to="/profile/edit">
-                    <button className="basic-button edit-profile-button">Edit Profile</button>
+                    <Button className="edit-profile-button" text="Edit Profile" />
                 </Link>
             </div>
             <div className="profile-details">

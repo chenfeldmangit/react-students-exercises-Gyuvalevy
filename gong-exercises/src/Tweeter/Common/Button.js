@@ -13,11 +13,12 @@ Button.propTypes = {
     id: PropTypes.string,
     className: PropTypes.string,
     text: PropTypes.string,
-    onChangeFunc: PropTypes.func.isRequired,
+    onChangeFunc: PropTypes.func,
     disabled: PropTypes.bool,
 }
 
 Button.defaultProps = {
+    onChangeFunc: () => {},
     id: '',
     className: '',
     text: '',

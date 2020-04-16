@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavigationMenu from "./Tweeter/NavigationMenu/NavigationMenu";
-import CenterPage from "./Tweeter/CenterPage/CenterPage";
+import CenterPageContainer from "./Tweeter/CenterPage/CenterPageContainer";
 import Loading from "./Tweeter/Loading/Loading";
 import RightPage from "./Tweeter/RightPage/RightPage";
 import './scss/twitter.scss';
@@ -42,7 +42,8 @@ class App extends Component {
                 <div className="main-wrapper">
                     <Loading show={this.state.showLoading}/>
                     <NavigationMenu switchProfile={this.switchProfile} profile={this.state.profile}/>
-                    <CenterPage show={!this.state.showLoading} changeLoading={this.changeLoading} profile={this.state.profile} saveProfile={this.changeCurrentProfile} />
+                    <CenterPageContainer show={!this.state.showLoading} changeLoading={this.changeLoading}
+                                         profile={this.state.profile} saveProfile={this.changeCurrentProfile}/>
                     <RightPage/>
                 </div>
             </BrowserRouter>

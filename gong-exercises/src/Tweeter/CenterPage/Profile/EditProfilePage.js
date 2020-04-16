@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import '../../../scss/twitter-left-side.scss';
 import '../../../scss/twitter-center-side.scss';
 import EditBox from "../../Common/EditBox";
+import Button from "../../Common/Button";
 
 class EditProfilePage extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class EditProfilePage extends Component {
                         <div id="profileCenter" className="center-container">
                             <div className="profile-title">
                                 <div className="title">Edit Your Profile</div>
-                                <button className="basic-button edit-profile-button" onClick={this.save}>Save</button>
+                                <Button onChangeFunc={this.save} text="Save" className="edit-profile-button" />
                             </div>
                             <div className="profile-details">
                                 <div className="profile-basic-info">
