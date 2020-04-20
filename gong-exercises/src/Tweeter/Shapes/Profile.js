@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 
 export const Profile = PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+
     name: PropTypes.string.isRequired,
     mention: PropTypes.string.isRequired,
     approved: PropTypes.bool.isRequired,

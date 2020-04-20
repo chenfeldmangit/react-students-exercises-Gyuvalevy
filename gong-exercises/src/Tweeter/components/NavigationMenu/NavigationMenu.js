@@ -3,7 +3,7 @@ import MenuItem from "./MenuItem";
 import '../../../scss/twitter-left-side.scss';
 import Button from "../Common/Button";
 
-const NavigationMenu = ({profile, switchProfile}) => {
+const NavigationMenu = ({profile, logout}) => {
     return (
         <>
             <div className="left-wrapper">
@@ -17,9 +17,9 @@ const NavigationMenu = ({profile, switchProfile}) => {
                 <MenuItem className="menu-item" id="leftMenuProfileLink" text="Profile"
                           imageSrc={profile.imgSrc} link="/profile"/>
                 <MenuItem className="menu-item left-menu-more" text="More"/>
-                <Button onChangeFunc={switchProfile}
+                <Button onChangeFunc={logout}
                         className="menu-item left-tweet-button"
-                        text="Switch Profile"
+                        text="Log Out"
                 />
             </div>
         </>

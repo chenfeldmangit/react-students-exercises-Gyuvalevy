@@ -2,11 +2,13 @@ import {useArrayStore} from "./ArrayStore";
 import {useStore} from "./Store";
 
 const KEY = 'profiles';
-const KEY_CURRENT_PROFILE = 'current_profile';
+// const KEY_CURRENT_PROFILE = 'current_profile';
 
 let initialProfiles = [
     {
         id: 1,
+        username: "yuvalevy",
+        password: "yuvalevy",
         name: "Yuval Levy",
         mention: "yuvalevy",
         approved: false,
@@ -19,6 +21,8 @@ let initialProfiles = [
     },
     {
         id: 2,
+        username: "benny",
+        password: "benny",
         name: "Benny Gantz",
         approved: true,
         mention: "gantzbe",
@@ -40,27 +44,18 @@ export const useProfiles = () => {
     return [profiles, setProfiles, getProfileById];
 };
 
-export const useCurrentProfile = () => {
-
-    const [profiles, setProfiles] = useProfiles();
-    const [currentProfileIndex, setCurrentProfileIndex] = useStore(KEY_CURRENT_PROFILE, 0)
-
-    const currentProfile = profiles[currentProfileIndex];
-
-    const switchProfile = () => {
-        let index = currentProfileIndex + 1;
-        if (index === profiles.length)
-            index = 0;
-
-        setCurrentProfileIndex(index);
-    }
-
-    const setCurrentProfile = (profile) => {
-        let allProfiles = profiles.slice();
-        allProfiles[currentProfile] = profile;
-        setProfiles(allProfiles);
-    };
-
-
-    return [currentProfile, setCurrentProfile, switchProfile];
-};
+// export const useCurrentProfile = () => {
+//
+//     const [profiles, setProfiles] = useProfiles();
+//     const [currentProfile, setCurrentProfile] = useStore(KEY_CURRENT_PROFILE, profiles[0])
+//
+//     const updateProfile = (profile) => {
+//         const pros = profiles.slice();
+//         const itemIndex = pros.findIndex(value => value.id === profile.id);
+//         pros[itemIndex] = profile;
+//         setProfiles(pros);
+//     };
+//
+//
+//     return [currentProfile, setCurrentProfile, updateProfile];
+// };
