@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes, {arrayOf} from 'prop-types';
-import {NotificationActionAssets} from "../../Shapes/NotificationAction";
-import {NotificationStructure} from "../../Shapes/NotificationStructure";
-import {Profile} from "../../Shapes/Profile";
+import {NotificationActionAssets} from "../../../Shapes/NotificationAction";
+import {NotificationStructure} from "../../../Shapes/NotificationStructure";
+import {Profile} from "../../../Shapes/Profile";
 
 const Notification = ({notification, byProfiles, content}) => {
     const notificationAsset = NotificationActionAssets[notification.action];

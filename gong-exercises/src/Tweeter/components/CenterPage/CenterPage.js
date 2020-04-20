@@ -1,7 +1,7 @@
 import React from "react";
 import {Switch, Route} from 'react-router-dom';
-import '../../scss/twitter-left-side.scss';
-import '../../scss/twitter-center-side.scss';
+import '../../../scss/twitter-left-side.scss';
+import '../../../scss/twitter-center-side.scss';
 
 const CenterPage = (props) => {
     return (<div id="centerPage" className="center-wrapper">

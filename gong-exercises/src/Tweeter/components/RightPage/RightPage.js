@@ -1,5 +1,5 @@
 import React from "react";
-import '../../scss/twitter-right-side.scss';
+import '../../../scss/twitter-right-side.scss';
 import EditBox from "../Common/EditBox";
 
 const RightPage = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import MenuItem from "./MenuItem";
-import '../../scss/twitter-left-side.scss';
+import '../../../scss/twitter-left-side.scss';
 import Button from "../Common/Button";
 
 const NavigationMenu = ({profile, switchProfile}) => {

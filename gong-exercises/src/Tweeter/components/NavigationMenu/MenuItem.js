@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 
-import '../../scss/twitter-left-side.scss';
+import '../../../scss/twitter-left-side.scss';
 
 const MenuItem = (props) => {
     const menuItem = <div onClick={props.onClick} id={props.id} className={props.className}>

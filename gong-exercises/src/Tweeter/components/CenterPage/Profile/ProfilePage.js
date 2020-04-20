@@ -1,9 +1,9 @@
 import React from "react";
-import '../../../scss/twitter-left-side.scss';
-import '../../../scss/twitter-center-side.scss';
+import '../../../../scss/twitter-left-side.scss';
+import '../../../../scss/twitter-center-side.scss';
 import {Link} from "react-router-dom";
 import Button from "../../Common/Button";
-import {Profile} from "../../Shapes/Profile";
+import {Profile} from "../../../Shapes/Profile";
 
 const Follow = ({iconClass, link}) => {
     return (

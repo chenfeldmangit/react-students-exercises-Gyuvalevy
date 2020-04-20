@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Notification from './Notification';
-import {NotificationStructure} from "../../Shapes/NotificationStructure";
-import '../../../scss/twitter-notifications.scss';
+import {NotificationStructure} from "../../../Shapes/NotificationStructure";
+import '../../../../scss/twitter-notifications.scss';
 
 const NotificationList = ({notifications, getProfileInformation, getTweetContent}) => {
     let profiles = {};

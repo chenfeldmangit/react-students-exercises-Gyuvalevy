@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import NavigationMenu from "./Tweeter/NavigationMenu/NavigationMenu";
-import CenterPageContainer from "./Tweeter/CenterPage/CenterPageContainer";
-import Loading from "./Tweeter/Loading/Loading";
-import RightPage from "./Tweeter/RightPage/RightPage";
+import NavigationMenu from "./Tweeter/components/NavigationMenu/NavigationMenu";
+import CenterPageContainer from "./Tweeter/containers/CenterPage/CenterPageContainer";
+import Loading from "./Tweeter/components/Loading/Loading";
+import RightPage from "./Tweeter/components/RightPage/RightPage";
 import './scss/twitter.scss';
 import './scss/twitter-basics.scss';
 import './scss/twitter-icons.scss';

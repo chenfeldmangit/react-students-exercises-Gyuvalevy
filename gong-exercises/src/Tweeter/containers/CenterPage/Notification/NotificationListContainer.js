@@ -1,5 +1,5 @@
 import React from "react";
-import NotificationList from "./NotificationList";
+import NotificationList from "./../../../components/CenterPage/Notification/NotificationList";
 
 const NotificationListContainer = ({notifications, getProfileInformation, getTweetContent}) => {
     return (

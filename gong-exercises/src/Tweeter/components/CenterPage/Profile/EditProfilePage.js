@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Redirect, Prompt} from "react-router-dom";
 import PropTypes from 'prop-types';
-import '../../../scss/twitter-left-side.scss';
-import '../../../scss/twitter-center-side.scss';
+import '../../../../scss/twitter-left-side.scss';
+import '../../../../scss/twitter-center-side.scss';
 import EditBox from "../../Common/EditBox";
 import Button from "../../Common/Button";
 

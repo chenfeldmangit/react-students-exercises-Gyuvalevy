@@ -1,14 +1,14 @@
-import React, {useEffect} from "react";
-import '../../scss/twitter-left-side.scss';
-import '../../scss/twitter-center-side.scss';
-import NewsFeed from "./NewsFeed/NewsFeed";
-import ProfilePage from "./Profile/ProfilePage";
-import EditProfilePage from "./Profile/EditProfilePage";
-import CenterPage from "./CenterPage";
+import React, {useEffect} from 'react';
+import '../../../scss/twitter-left-side.scss';
+import '../../../scss/twitter-center-side.scss';
+import NewsFeed from "./../../components/CenterPage/NewsFeed/NewsFeed";
+import ProfilePage from "./../../components/CenterPage/Profile/ProfilePage";
+import EditProfilePage from "./../../components/CenterPage/Profile/EditProfilePage";
+import CenterPage from "./../../components/CenterPage/CenterPage";
 import NotificationListContainer from "./Notification/NotificationListContainer";
-import {useNotifications} from "../Stores/NotificationStore";
-import {useProfiles} from "../Stores/ProfileStore";
-import {useTweets} from "../Stores/TweetStore";
+import {useNotifications} from "../../Stores/NotificationStore";
+import {useProfiles} from "../../Stores/ProfileStore";
+import {useTweets} from "../../Stores/TweetStore";
 
 const CenterPageContainer = (props) => {
     const [notificationsList] = useNotifications();
