@@ -1,0 +1,155 @@
+#loadingCenter.center-wrapper {
+  text-align: center;
+}
+
+.center-wrapper {
+  flex-grow: 3;
+  max-width: 60vw;
+  width: 60vw;
+
+  .title {
+    overflow: hidden;
+    height: 30px;
+  }
+
+  .center-container {
+    > div {
+      border: 3px solid rgb(230, 236, 240);
+      border-top-width: 0;
+      max-height: 90vh;
+    }
+
+    > :first-child {
+      border-top: 3px solid rgb(230, 236, 240);
+      font-weight: bold;
+    }
+
+    > .scroll {
+      overflow-y: scroll;
+    }
+  }
+}
+
+.profile-mention, .post-tile, .profile-description {
+  color: rgb(101, 119, 134);
+}
+
+.feed-post {
+  display: flex;
+  flex-direction: row;
+  border-top: 3px solid rgb(230, 236, 240);
+
+  &:first-child {
+    border-top-width: 0;
+  }
+
+  > div {
+    margin: 10px;
+  }
+
+  .post {
+    flex-grow: 3;
+
+    .post-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-right: 50px;
+
+      i {
+        height: 20px;
+        width: 20px;
+        padding: 10px;
+      }
+
+      > :hover {
+        color: rgb(30, 162, 243);
+      }
+    }
+
+    .action {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &:hover {
+    flex-grow: 1;
+    background-color: rgb(245, 248, 250);
+  }
+
+  .post-information {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 5px;
+    padding-top: 5px;
+  }
+
+  .profile-information {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+
+    > div {
+      margin-right: 5px;
+    }
+
+    .profile-name {
+      font-weight: bold;
+    }
+
+    .profile-mention:after {
+      content: '·';
+      padding-left: 5px;
+    }
+  }
+}
+
+#profileCenter {
+  .profile-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #profileName {
+    font-weight: bold;
+  }
+
+  .profile-details {
+    padding: 10px;
+
+    .profile-basic-info {
+      display: flex;
+      flex-direction: row;
+
+      > div {
+        margin-right: 10px;
+      }
+    }
+
+    > div {
+      margin-bottom: 20px;
+    }
+
+    .profile-section {
+      display: flex;
+      flex-direction: row;
+
+      > div {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  #profileFollowing, #profileFollowers {
+    font-weight: bold;
+  }
+
+  .edit-profile-button {
+    width: 150px;
+  }
+}
