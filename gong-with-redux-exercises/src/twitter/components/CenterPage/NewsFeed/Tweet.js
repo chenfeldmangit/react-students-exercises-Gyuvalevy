@@ -19,7 +19,9 @@ const Tweet = (props) => {
     const addRetweets = () => {
         props.tweet.retweets++;
         props.addRetweet(props.tweet);
-    };
+    }
+
+    const deleteTweet = () => props.deleteTweet(props.tweet);
 
     return (
         <div className="feed-post">
@@ -44,7 +46,7 @@ const Tweet = (props) => {
                     <TweetAction onClick={addRetweets} divClassName="retweets" content={retweets} iconClass="retweet"/>
                     <TweetAction onClick={addLike} divClassName="likes" content={likes} iconClass="heart"/>
                     <TweetAction iconClass="upload"/>
-                    <TweetAction onClick={props.deleteTweet} iconClass="delete"/>
+                    <TweetAction onClick={deleteTweet} iconClass="delete"/>
                 </div>
             </div>
         </div>

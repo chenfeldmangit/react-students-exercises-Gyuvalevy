@@ -3,18 +3,20 @@ import PropTypes from "prop-types";
 import '../../../../scss/twitter-add-tweet.scss';
 import Button from "../../Common/Button";
 
+const initState = {
+    content: '',
+    okToSend : false,
+};
+
 class AddTweet extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            content: '',
-            okToSend: false,
-        };
+        this.state = initState;
     }
 
     submitTweet = () => {
         if (this.state.okToSend) {
-            this.setState({content: ''});
+            this.setState(initState);
             return this.props.sendTweet(this.state.content);
         }
     }
