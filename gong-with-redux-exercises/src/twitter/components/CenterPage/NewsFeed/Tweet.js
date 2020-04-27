@@ -2,26 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 import TweetAction from "./TweetAction";
 
-const Tweet = (props) => {
-    const { postTime, postContent, comments, retweets, likes } = props.tweet;
-    const { profile } = props;
-
-    const addLike = () => {
-        props.tweet.likes++;
-        props.addLike(props.tweet);
-    };
-
-    const addComment = () => {
-        props.tweet.comments++;
-        props.addComment(props.tweet);
-    };
-
-    const addRetweets = () => {
-        props.tweet.retweets++;
-        props.addRetweet(props.tweet);
-    }
-
-    const deleteTweet = () => props.deleteTweet(props.tweet);
+const Tweet = ({profile, tweet, addComment, addRetweet, addLike, deleteTweet}) => {
+    const { postTime, postContent, comments, retweets, likes } = tweet;
 
     return (
         <div className="feed-post">
@@ -42,11 +24,11 @@ const Tweet = (props) => {
                     <span>{postContent}</span>
                 </div>
                 <div className="post-actions">
-                    <TweetAction onClick={addComment} divClassName="comments" content={comments} iconClass="speech-bubble"/>
-                    <TweetAction onClick={addRetweets} divClassName="retweets" content={retweets} iconClass="retweet"/>
-                    <TweetAction onClick={addLike} divClassName="likes" content={likes} iconClass="heart"/>
+                    <TweetAction onClick={() => addComment(tweet)} divClassName="comments" content={comments} iconClass="speech-bubble"/>
+                    <TweetAction onClick={() => addRetweet(tweet)} divClassName="retweets" content={retweets} iconClass="retweet"/>
+                    <TweetAction onClick={() => addLike(tweet)} divClassName="likes" content={likes} iconClass="heart"/>
                     <TweetAction iconClass="upload"/>
-                    <TweetAction onClick={deleteTweet} iconClass="delete"/>
+                    <TweetAction onClick={() => deleteTweet(tweet)} iconClass="delete"/>
                 </div>
             </div>
         </div>

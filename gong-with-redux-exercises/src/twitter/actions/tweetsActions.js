@@ -1,8 +1,11 @@
 export const INIT_TWEETS = 'INIT_TWEETS';
 export const SET_TWEETS = 'SET_TWEETS';
 export const ADD_TWEET = 'ADD_TWEET';
-export const REPLACE_TWEET = 'REPLACE_TWEET';
 export const REMOVE_TWEET = 'REMOVE_TWEET';
+
+export const LIKE_TWEET = 'LIKE_TWEET';
+export const RETWEET_TWEET = 'RETWEET_TWEET';
+export const COMMENT_TWEET = 'COMMENT_TWEET';
 
 export function initTweets() {
     return {
@@ -28,9 +31,27 @@ export function addTweet(tweet) {
     };
 }
 
-export function replaceTweet(tweet) {
+export function likeTweet(tweet) {
     return {
-        type: REPLACE_TWEET,
+        type: LIKE_TWEET,
+        payload: {
+            tweet,
+        }
+    };
+}
+
+export function retweetTweet(tweet) {
+    return {
+        type: RETWEET_TWEET,
+        payload: {
+            tweet,
+        }
+    };
+}
+
+export function commentTweet(tweet) {
+    return {
+        type: COMMENT_TWEET,
         payload: {
             tweet,
         }

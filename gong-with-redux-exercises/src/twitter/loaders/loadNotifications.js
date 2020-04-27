@@ -41,6 +41,13 @@ export function getNotifications() {
 }
 
 export function setNotifications(notifications) {
-    setAll(notifications);
+    return new Promise((resolve, reject) => {
+        try {
+            setAll(notifications);
+            resolve();
+        } catch (err) {
+            reject(err);
+        }
+    });
 }
 

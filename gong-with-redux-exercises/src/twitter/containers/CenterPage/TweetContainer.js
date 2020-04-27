@@ -1,75 +1,17 @@
 import {connect} from "react-redux";
-import {addNotification} from "../../actions/notificationsActions";
+import {commentTweet, likeTweet, removeTweet, retweetTweet} from "../../actions/tweetsActions";
 import Tweet from "../../components/CenterPage/NewsFeed/Tweet";
-import React from "react";
-import {removeTweet, replaceTweet} from "../../actions/tweetsActions";
-import {
-    NOTIFICATION_ACTION_TYPE_COMMENT,
-    NOTIFICATION_ACTION_TYPE_LIKE,
-    NOTIFICATION_ACTION_TYPE_RETWEET
-} from "../../Shapes/NotificationAction";
 
-function TweetContainer({tweet, profiles, currentUser, replaceTweet, addNotification, deleteTweet}) {
-
-    const itemIndex = profiles.findIndex(value => value.id === tweet.profileId);
-    const profile = profiles[itemIndex]
-
-    const addLike = (tweet) => {
-        const notification = {
-            key: Math.floor(Math.random() * 100000),
-            tweetId: tweet.key,
-            action: NOTIFICATION_ACTION_TYPE_LIKE,
-            byId: [currentUser.id],
-        };
-        replaceTweet(tweet);
-        addNotification(notification);
-    }
-
-    const addRetweet = (tweet) => {
-        const notification = {
-            key: Math.floor(Math.random() * 100000),
-            tweetId: tweet.key,
-            action: NOTIFICATION_ACTION_TYPE_RETWEET,
-            byId: [currentUser.id],
-        };
-        replaceTweet(tweet);
-        addNotification(notification);
-    }
-
-    const addComment = (tweet) => {
-        const notification = {
-            key: Math.floor(Math.random() * 100000),
-            tweetId: tweet.key,
-            action: NOTIFICATION_ACTION_TYPE_COMMENT,
-            byId: [currentUser.id],
-        };
-        replaceTweet(tweet);
-        addNotification(notification);
-    }
-
-    return (
-        <Tweet
-            profile={profile}
-            tweet={tweet}
-            deleteTweet={deleteTweet}
-            addLike={addLike}
-            addRetweet={addRetweet}
-            addComment={addComment}
-        />
-    )
-}
-
-
-const mapStateToProps = (state) => ({
-    profiles: state.profiles,
-    currentUser: state.currentUserDetails.currentUser,
+const mapStateToProps = (state, ownProps) => ({
+    profile: state.profiles.find(value => value.id === ownProps.tweet.profileId)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    replaceTweet: (tweet) => dispatch(replaceTweet(tweet)),
-    addNotification: (notification) => dispatch(addNotification(notification)),
+    addLike: (tweet) => dispatch(likeTweet(tweet)),
+    addComment: (tweet) => dispatch(commentTweet(tweet)),
+    addRetweet: (tweet) => dispatch(retweetTweet(tweet)),
     deleteTweet: (tweet) => dispatch(removeTweet(tweet)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TweetContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Tweet);
 
