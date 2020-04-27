@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {getId} from "../util";
 
 export const NOTIFICATION_ACTION_TYPE_LIKE = 'like';
 export const NOTIFICATION_ACTION_TYPE_FOLLOWS = 'follows';
@@ -16,7 +17,7 @@ const renderName = (name, index, all) => {
     else if (all.length - 2 === index)
         addition = ' and ';
 
-    return <span key={Math.floor(Math.random() * 100000)}><span className="by-name">{name}</span>{addition}</span>
+    return <span key={getId()}><span className="by-name">{name}</span>{addition}</span>
 };
 
 const appendNames = (names) => names.map(renderName);

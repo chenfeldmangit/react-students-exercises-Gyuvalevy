@@ -3,14 +3,14 @@ import MenuItem from "./MenuItem";
 import Button from "../Common/Button";
 import '../../../scss/twitter-left-side.scss';
 
-const NavigationMenu = ({profile, logout}) => {
+const NavigationMenu = ({profile, logout, notificationsCount}) => {
     return (
         <>
             <div className="left-wrapper">
                 <MenuItem className="menu-item left-menu-icon"/>
                 <MenuItem className="menu-item left-menu-home" text="Home" id="leftMenuHomeLink" link="/"/>
                 <MenuItem className="menu-item left-menu-explore" text="Explore"/>
-                <MenuItem className="menu-item left-menu-notification" text="Notification" link="/notifications"/>
+                <MenuItem className="menu-item left-menu-notification" text={`Notification (${notificationsCount})`} link="/notifications"/>
                 <MenuItem className="menu-item left-menu-messages" text="Messages"/>
                 <MenuItem className="menu-item left-menu-bookmarks" text="Bookmarks"/>
                 <MenuItem className="menu-item left-menu-lists" text="Lists"/>

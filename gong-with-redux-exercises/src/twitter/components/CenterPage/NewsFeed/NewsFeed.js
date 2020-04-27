@@ -4,13 +4,14 @@ import '../../../../scss/twitter-center-side.scss';
 import '../../../../scss/twitter-left-side.scss';
 import {NOTIFICATION_ACTION_TYPE_TWEET} from "../../../Shapes/NotificationAction";
 import TweetsListContainer from "../../../containers/CenterPage/TweetsListContainer";
+import { getId } from "../../../util";
 
 const NewsFeed = ({sendTweet, currentUser}) => {
 
     const createTweet = (tweetContent) => {
         let now = new Date();
         return {
-            key: Math.floor(Math.random() * 100000),
+            key: getId(),
             profileId: currentUser.id,
             comments: 0,
             retweets: 0,
@@ -22,7 +23,7 @@ const NewsFeed = ({sendTweet, currentUser}) => {
 
     const createNotifications = (tweet) => {
         return {
-            key: Math.floor(Math.random() * 100000),
+            key: getId(),
             tweetId: tweet.key,
             action: NOTIFICATION_ACTION_TYPE_TWEET,
             byId: [currentUser.id],

@@ -19,6 +19,7 @@ import {
     ADD_NOTIFICATION,
     DELETE_NOTIFICATIONS
 } from "../actions/notificationsActions";
+import {getId} from "../util";
 
 function* initTweets() {
     const tweets = getTweets();
@@ -50,7 +51,7 @@ function* notify(tweetKey, notificationAction) {
         type: ADD_NOTIFICATION,
         payload: {
             notification: {
-                key: Math.floor(Math.random() * 100000),
+                key: getId(),
                 tweetId: tweetKey,
                 action: notificationAction,
                 byId: [currentUser.id],

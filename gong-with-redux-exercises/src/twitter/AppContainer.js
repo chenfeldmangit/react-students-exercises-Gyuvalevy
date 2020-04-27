@@ -5,6 +5,4 @@ const mapStateToProps = (state) => ({
     currentProfile: state.currentUserDetails.currentUser,
 })
 
-const mapDispatchToProps = () => ({})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);

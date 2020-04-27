@@ -1,14 +1,10 @@
 import {connect} from "react-redux";
 import NotificationList from "./../../components/CenterPage/Notification/NotificationList";
+import {filterNotificationsForUser} from "../../util";
 
 const mapStateToProps = (state) => ({
-    tweets: state.tweets,
-    notifications: state.notifications,
-    profiles: state.profiles,
+    notifications:  filterNotificationsForUser(state.notifications, state.currentUserDetails.currentUser.id),
 })
 
-const mapDispatchToProps = (dispatch) => ({
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(NotificationList);
+export default connect(mapStateToProps, null)(NotificationList);
 

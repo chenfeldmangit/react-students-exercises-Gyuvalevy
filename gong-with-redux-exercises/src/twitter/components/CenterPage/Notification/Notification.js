@@ -3,6 +3,7 @@ import PropTypes, {arrayOf} from 'prop-types';
 import {NotificationActionAssets} from "../../../Shapes/NotificationAction";
 import {NotificationStructure} from "../../../Shapes/NotificationStructure";
 import {Profile} from "../../../Shapes/Profile";
+import {getId} from "../../../util";
 
 const Notification = ({notification, byProfiles, content}) => {
     const notificationAsset = NotificationActionAssets[notification.action];
@@ -19,7 +20,7 @@ const Notification = ({notification, byProfiles, content}) => {
                     {
                         byProfiles.map(
                             (profile) =>
-                                (<img className="profile-picture" src={profile.imgSrc} alt="notification-type" key={Math.floor(Math.random() * 100000)} />))
+                                (<img className="profile-picture" src={profile.imgSrc} alt="notification-type" key={getId()} />))
                     }
                 </div>
                 <div className="text">
