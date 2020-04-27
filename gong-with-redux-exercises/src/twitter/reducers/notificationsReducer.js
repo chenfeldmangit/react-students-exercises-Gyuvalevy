@@ -1,14 +1,12 @@
 import {ADD_NOTIFICATION, SET_NOTIFICATIONS} from '../actions/notificationsActions';
-import {getNotifications, setNotifications} from "../loaders/loadNotifications";
+import {setNotifications} from "../loaders/loadNotifications";
 
-const initialState = getNotifications() || [];
-
-export default function notificationsReducer(state = initialState, action) {
+export default function notificationsReducer(state = [], action) {
     const payload = action.payload;
 
     switch (action.type) {
         case SET_NOTIFICATIONS:
-            return initialState;
+            return payload.notifications;
 
         case ADD_NOTIFICATION: {
             const newNotifications = state.slice();

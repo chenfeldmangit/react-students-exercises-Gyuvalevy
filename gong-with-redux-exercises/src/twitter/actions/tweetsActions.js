@@ -1,11 +1,21 @@
+export const INIT_TWEETS = 'INIT_TWEETS';
 export const SET_TWEETS = 'SET_TWEETS';
 export const ADD_TWEET = 'ADD_TWEET';
 export const REPLACE_TWEET = 'REPLACE_TWEET';
 export const REMOVE_TWEET = 'REMOVE_TWEET';
 
-export function setTweets() {
+export function initTweets() {
+    return {
+        type: INIT_TWEETS,
+    };
+}
+
+export function setTweets(tweets) {
     return {
         type: SET_TWEETS,
+        payload: {
+            tweets,
+        }
     };
 }
 

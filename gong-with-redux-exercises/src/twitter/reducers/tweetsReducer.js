@@ -1,14 +1,12 @@
-import {ADD_TWEET, REMOVE_TWEET, SET_TWEETS, REPLACE_TWEET} from '../actions/tweetsActions';
-import {getTweets, setTweets} from "../loaders/loadTweets";
+import {ADD_TWEET, REMOVE_TWEET, REPLACE_TWEET, SET_TWEETS} from '../actions/tweetsActions';
+import {setTweets} from "../loaders/loadTweets";
 
-const initialState = getTweets() || [];
-
-export default function tweetsReducer(state = initialState, action) {
+export default function tweetsReducer(state = [], action) {
     const payload = action.payload;
 
     switch (action.type) {
         case SET_TWEETS: {
-            return initialState;
+            return payload.tweets;
         }
 
         case REMOVE_TWEET: {
