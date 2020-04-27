@@ -22,11 +22,11 @@ export function setTweets(tweets) {
     };
 }
 
-export function addTweet(tweet) {
+export function addTweet(content) {
     return {
         type: ADD_TWEET,
         payload: {
-            tweet,
+            content,
         },
     };
 }

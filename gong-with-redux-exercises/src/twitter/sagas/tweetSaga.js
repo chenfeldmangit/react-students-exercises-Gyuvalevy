@@ -13,12 +13,10 @@ import {
 import {
     NOTIFICATION_ACTION_TYPE_COMMENT,
     NOTIFICATION_ACTION_TYPE_LIKE,
-    NOTIFICATION_ACTION_TYPE_RETWEET
+    NOTIFICATION_ACTION_TYPE_RETWEET,
+    NOTIFICATION_ACTION_TYPE_TWEET
 } from "../Shapes/NotificationAction";
-import {
-    ADD_NOTIFICATION,
-    DELETE_NOTIFICATIONS
-} from "../actions/notificationsActions";
+import {ADD_NOTIFICATION, DELETE_NOTIFICATIONS} from "../actions/notificationsActions";
 import {getId} from "../util";
 
 function* initTweets() {
@@ -118,12 +116,25 @@ function* commentTweet(action) {
 }
 
 function* addTweet(action) {
-    const {tweet} = action.payload;
+    const currentUser = yield select(getStateCurrentUser);
 
-    const tweets = yield select(getStateTweets);
-    tweets.splice(0, 0, tweet);
+    let now = new Date();
+    const tweet = {
+        key: getId(),
+        profileId: currentUser.id,
+        comments: 0,
+        retweets: 0,
+        likes: 0,
+        postTime: now.toDateString() + ', ' + now.toLocaleTimeString(),
+        postContent: action.payload.content,
+    };
 
-    yield setTweetsStores(tweets);
+    const actionOnTweets = (tweets, tweet) => {
+        tweets.splice(0, 0, tweet);
+        return tweets;
+    };
+
+    yield replaceTweet(tweet, actionOnTweets, NOTIFICATION_ACTION_TYPE_TWEET);
 }
 
 
