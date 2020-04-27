@@ -39,8 +39,8 @@ const ProfilePage = ({profile}) => {
                     <Follow iconClass="hyperlink" link={profile.homelink}/>
                 </div>
                 <div className="profile-section">
-                    <div><span id="profileFollowing"/>{profile.followers}<span> Following</span></div>
-                    <div><span id="profileFollowers"/>{profile.followers}<span> Followers</span></div>
+                    <div><span id="profileFollowing">{profile.followers}</span> Following</div>
+                    <div><span id="profileFollowers">{profile.followers}</span> Followers</div>
                 </div>
             </div>
         </div>

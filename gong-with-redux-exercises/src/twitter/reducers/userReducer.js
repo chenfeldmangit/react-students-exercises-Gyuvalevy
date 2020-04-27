@@ -1,5 +1,4 @@
-import {LOGIN_FAILED, LOGIN_PROFILE, LOGOUT, UPDATE_PROFILE} from '../actions/loginActions';
-import {replaceProfileById} from "../loaders/loadProfiles";
+import {LOGIN_FAILED, LOGIN_PROFILE, LOGOUT, SET_PROFILE} from '../actions/loginActions';
 
 const initialState = {
     currentUser: undefined,
@@ -10,18 +9,7 @@ export default function userReducer(state = initialState, action) {
     const payload = action.payload;
 
     switch (action.type) {
-        case UPDATE_PROFILE: {
-            const newProfile = Object.assign({}, state.currentUser);
-            newProfile.name = action.payload.profile.name;
-            newProfile.mention = action.payload.profile.mention;
-            newProfile.description = action.payload.profile.description;
-            replaceProfileById(newProfile);
-            return {
-                error: '',
-                currentUser: newProfile,
-            };
-        }
-
+        case SET_PROFILE:
         case LOGIN_PROFILE:
             return {
                 error: '',

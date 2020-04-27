@@ -3,7 +3,6 @@ import LocalStorageBasics from "./LocalStorageBasics";
 const KEY = 'profiles';
 const setAll = LocalStorageBasics.setItems(KEY);
 const getAll = LocalStorageBasics.getItems(KEY);
-const replaceById = LocalStorageBasics.replaceItemById(KEY);
 
 const profilesInfo = [
     {
@@ -49,6 +48,13 @@ export function getProfiles() {
     return all;
 }
 
-export function replaceProfileById(profile) {
-    replaceById(profile);
+export function setProfiles(profiles) {
+    return new Promise((resolve, reject) => {
+        try {
+            setAll(profiles);
+            resolve();
+        } catch (err) {
+            reject(err);
+        }
+    });
 }

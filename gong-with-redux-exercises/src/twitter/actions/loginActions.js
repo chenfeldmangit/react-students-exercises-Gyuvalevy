@@ -4,6 +4,7 @@ export const LOGOUT = 'LOGOUT';
 export const SIGN_UP = 'SIGN_UP';
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const SET_PROFILE = 'SET_PROFILE';
 
 export function loginProfile(profile) {
     return {

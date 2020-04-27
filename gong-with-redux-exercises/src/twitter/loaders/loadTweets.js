@@ -37,7 +37,6 @@ export function getTweets() {
     return all;
 }
 
-
 export function setTweets(tweets) {
     return new Promise((resolve, reject) => {
         try {
