@@ -1,4 +1,4 @@
-import {APPEND_TWEET, REMOVE_TWEET, SET_TWEETS, REPLACE_TWEET} from '../actions/tweetsActions';
+import {ADD_TWEET, REMOVE_TWEET, SET_TWEETS, REPLACE_TWEET} from '../actions/tweetsActions';
 import {getTweets, setTweets} from "../loaders/loadTweets";
 
 const initialState = getTweets() || [];
@@ -17,7 +17,7 @@ export default function tweetsReducer(state = initialState, action) {
             return filteredTweets;
         }
 
-        case APPEND_TWEET: {
+        case ADD_TWEET: {
             const newTweets = state.slice();
             newTweets.splice(0, 0, payload.tweet);
             setTweets(newTweets);
@@ -27,7 +27,7 @@ export default function tweetsReducer(state = initialState, action) {
         case REPLACE_TWEET: {
             const newTweets = state.slice();
             const index = newTweets.findIndex((tweet) => tweet.key === payload.tweet.key);
-            newTweets[index] = payload.tweet;
+            newTweets[index] = Object.assign({}, payload.tweet);
             setTweets(newTweets);
             return newTweets;
         }

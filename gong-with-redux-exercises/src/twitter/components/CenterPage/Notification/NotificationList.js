@@ -16,9 +16,8 @@ const NotificationList = ({notifications, profiles, tweets}) => {
     }
 
     const getTweetContent = (tweetKey) => {
-        return 'lallaa';
-        // const itemIndex = tweets.findIndex(value => value.key === tweetKey);
-        // return tweets[itemIndex].postContent;
+        const itemIndex = tweets.findIndex(value => value.key === tweetKey);
+        return tweets[itemIndex].postContent;
     }
 
     return (

@@ -1,35 +1,15 @@
 import React from "react";
 import '../../../../scss/twitter-left-side.scss';
-import Tweet from "./Tweet";
-import PropTypes from "prop-types";
+import TweetContainer from "../../../containers/CenterPage/TweetContainer";
 
-const TweetsList = ({tweets, profiles, replaceTweet, deleteTweet}) => {
-
-    const getProfile = (profileId) => {
-        const itemIndex = profiles.findIndex(value => value.id === profileId);
-        return profiles[itemIndex];
-    }
-
+const TweetsList = ({tweets}) => {
     return (
         <div className="feed-posts scroll">
             {
-                tweets.map(tweet =>
-                    <Tweet
-                        key={tweet.key}
-                        tweet={tweet}
-                        profile={getProfile(tweet.profileId)}
-                        replaceTweet={replaceTweet}
-                        deleteTweet={() => deleteTweet(tweet)}
-                    />)
+                tweets.map(tweet => <TweetContainer key={tweet.key} tweet={tweet}/>)
             }
         </div>
     );
 };
-
-TweetsList.propTypes = {
-    getProfileInformation: PropTypes.func,
-    replaceTweet: PropTypes.func.isRequired,
-    deleteTweet: PropTypes.func.isRequired,
-}
 
 export default TweetsList;

@@ -1,14 +1,15 @@
 import React from "react";
-import TweetsList from "./TweetsList";
 import AddTweet from "./AddTweet";
 import '../../../../scss/twitter-center-side.scss';
 import '../../../../scss/twitter-left-side.scss';
+import {NOTIFICATION_ACTION_TYPE_TWEET} from "../../../Shapes/NotificationAction";
+import TweetsListContainer from "../../../containers/CenterPage/TweetsListContainer";
 
-const NewsFeed = ({tweets, profiles, sendTweet, replaceTweet, deleteTweet, currentUser}) => {
+const NewsFeed = ({sendTweet, currentUser}) => {
 
     const createTweet = (tweetContent) => {
         let now = new Date();
-        const newTweet = {
+        return {
             key: Math.floor(Math.random() * 100000),
             profileId: currentUser.id,
             comments: 0,
@@ -17,20 +18,28 @@ const NewsFeed = ({tweets, profiles, sendTweet, replaceTweet, deleteTweet, curre
             postTime: now.toDateString() + ', ' + now.toLocaleTimeString(),
             postContent: tweetContent,
         };
+    }
 
-        sendTweet(newTweet);
+    const createNotifications = (tweet) => {
+        return {
+            key: Math.floor(Math.random() * 100000),
+            tweetId: tweet.key,
+            action: NOTIFICATION_ACTION_TYPE_TWEET,
+            byId: [currentUser.id],
+        };
+    }
+
+    const send = (tweetContent) => {
+        const tweet = createTweet(tweetContent);
+        const notification = createNotifications(tweet);
+        sendTweet(tweet, notification);
     }
 
     return (
         <div className="center-container">
             <div className="title">Home</div>
-            <AddTweet sendTweet={createTweet}/>
-            <TweetsList
-                tweets={tweets}
-                profiles={profiles}
-                replaceTweet={replaceTweet}
-                deleteTweet={deleteTweet}
-            />
+            <AddTweet sendTweet={send}/>
+            <TweetsListContainer />
         </div>
     );
 };

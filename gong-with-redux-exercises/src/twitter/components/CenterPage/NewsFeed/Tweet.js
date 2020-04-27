@@ -8,17 +8,17 @@ const Tweet = (props) => {
 
     const addLike = () => {
         props.tweet.likes++;
-        props.replaceTweet(props.tweet);
+        props.addLike(props.tweet);
     };
 
     const addComment = () => {
         props.tweet.comments++;
-        props.replaceTweet(props.tweet);
+        props.addComment(props.tweet);
     };
 
     const addRetweets = () => {
         props.tweet.retweets++;
-        props.replaceTweet(props.tweet);
+        props.addRetweet(props.tweet);
     };
 
     return (
@@ -69,8 +69,10 @@ const TweetStructure = PropTypes.shape({
 Tweet.propTypes = {
     profile: Profile.isRequired,
     tweet: TweetStructure.isRequired,
-    replaceTweet: PropTypes.func.isRequired,
     deleteTweet: PropTypes.func.isRequired,
+    addLike: PropTypes.func.isRequired,
+    addRetweet: PropTypes.func.isRequired,
+    addComment: PropTypes.func.isRequired,
 }
 
 export default Tweet;

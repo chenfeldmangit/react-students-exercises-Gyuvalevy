@@ -11,8 +11,8 @@ const getAll = LocalStorageBasics.getItems(KEY);
 
 let initialNotifications = [
     {
-        tweetId: 2,
         key: 1,
+        tweetId: 2,
         action: NOTIFICATION_ACTION_TYPE_TWEET,
         byId: [1, 2],
     },
@@ -38,5 +38,9 @@ export function getNotifications() {
     if (!all)
         all = populateLocalStorage();
     return all;
+}
+
+export function setNotifications(notifications) {
+    setAll(notifications);
 }
 

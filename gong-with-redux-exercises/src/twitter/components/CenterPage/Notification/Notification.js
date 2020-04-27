@@ -19,7 +19,7 @@ const Notification = ({notification, byProfiles, content}) => {
                     {
                         byProfiles.map(
                             (profile) =>
-                                (<img className="profile-picture" src={profile.imgSrc} alt="notification-type" key={profile.id} />))
+                                (<img className="profile-picture" src={profile.imgSrc} alt="notification-type" key={Math.floor(Math.random() * 100000)} />))
                     }
                 </div>
                 <div className="text">
