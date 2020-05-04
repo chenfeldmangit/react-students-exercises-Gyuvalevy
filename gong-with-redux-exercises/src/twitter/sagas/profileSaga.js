@@ -1,39 +1,36 @@
-import {takeLatest, put, select, call} from 'redux-saga/effects';
+import {takeLatest, put, select, call, all} from 'redux-saga/effects';
 import {getProfiles, setProfiles} from "../loaders/loadProfiles";
-import {INIT_PROFILES, SET_PROFILES} from "../actions/profilesActions";
-import {SET_PROFILE, UPDATE_PROFILE} from "../actions/loginActions";
 import {getStateCurrentUser, getStateProfiles} from "../selectors/twitterSelectors";
+import {INIT_PROFILES, SET_PROFILES} from "../actions/profilesActions";
+import {LOGIN_FAILED, LOGIN_PROFILE, SET_PROFILE, TRY_LOGIN, UPDATE_PROFILE} from "../actions/loginActions";
+import {FETCH_APP_DATA} from "../actions/fetchAppDataActions";
 
 function* setProfilesStores(profiles) {
-
     yield call(setProfiles, profiles);
-
-    yield put({
-        type: SET_PROFILES,
-        payload: {
-            profiles: [...profiles]
-        }
-    });
+    yield put({type: SET_PROFILES, payload: {profiles: [...profiles]}});
 }
 
 function* setCurrentProfileStores(profile) {
-    yield put({
-        type: SET_PROFILE,
-        payload: {
-            profile
-        }
-    });
+    yield put({type: SET_PROFILE, payload: {profile}});
+}
+
+function* tryLoginUser(action) {
+    const {username, password} = action.payload;
+    const profiles = yield select(getStateProfiles);
+
+    const profile = profiles.find((profile) => (username === profile.username) && (password === profile.password));
+    if (profile)
+        yield all([
+            put({type: LOGIN_PROFILE, payload: {profile}}),
+            put({type: FETCH_APP_DATA}),
+        ]);
+    else
+        yield put({type: LOGIN_FAILED, payload: {errorMessage: 'Error logging in'}});
 }
 
 function* initProfile() {
-
-    const profiles = getProfiles();
-    yield put({
-        type: SET_PROFILES,
-        payload: {
-            profiles
-        }
-    });
+    const profiles = yield call(getProfiles);
+    yield put({type: SET_PROFILES, payload: {profiles}});
 }
 
 function* updateProfile(action) {
@@ -55,6 +52,7 @@ function* updateProfile(action) {
 }
 
 export default function* root() {
+    yield takeLatest(TRY_LOGIN, tryLoginUser);
     yield takeLatest(INIT_PROFILES, initProfile);
     yield takeLatest(UPDATE_PROFILE, updateProfile);
 }

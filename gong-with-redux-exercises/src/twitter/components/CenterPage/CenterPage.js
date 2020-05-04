@@ -6,17 +6,23 @@ import NotificationListContainer from "../../containers/CenterPage/NotificationL
 import '../../../scss/twitter-left-side.scss';
 import '../../../scss/twitter-center-side.scss';
 import NewsFeed from "./NewsFeed/NewsFeed";
+import LoadingContainer from "../../containers/LoadingContainer";
+import ErrorPopupContainer from "../../containers/ErrorPopupContainer";
 
-const CenterPage = ({show, finishedLoading}) => {
-    finishedLoading();
+const CenterPage = ({show, hasErrors}) => {
     return show && (
         <div id="centerPage" className="center-wrapper">
-            <Switch>
-                <Route path="/" exact component={NewsFeed}/>
-                <Route path="/profile" exact component={ProfilePageContainer}/>
-                <Route path="/profile/edit" component={EditProfilePageContainer}/>
-                <Route path="/notifications" component={NotificationListContainer}/>
-            </Switch>
+            {
+                hasErrors
+                    ? (<ErrorPopupContainer/>)
+                    : (<Switch>
+                        <Route path="/" exact component={NewsFeed}/>
+                        <Route path="/profile" exact component={ProfilePageContainer}/>
+                        <Route path="/profile/edit" component={EditProfilePageContainer}/>
+                        <Route path="/notifications" component={NotificationListContainer}/>
+                    </Switch>)
+            }
+            <LoadingContainer/>
         </div>
     );
 };

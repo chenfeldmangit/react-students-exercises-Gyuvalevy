@@ -31,10 +31,17 @@ function populateLocalStorage() {
 }
 
 export function getTweets() {
-    let all = getAll();
-    if (!all)
-        all = populateLocalStorage();
-    return all;
+    return new Promise((resolve, reject) => {
+        try {
+            let all = getAll();
+            if (!all)
+                all = populateLocalStorage();
+            setTimeout(() => resolve(all), 7000);
+        } catch (err) {
+            reject(err);
+        }
+    });
+
 }
 
 export function setTweets(tweets) {

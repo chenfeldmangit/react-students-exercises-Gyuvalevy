@@ -34,10 +34,16 @@ function populateLocalStorage() {
 }
 
 export function getNotifications() {
-    let all = getAll();
-    if (!all)
-        all = populateLocalStorage();
-    return all;
+    return new Promise((resolve, reject) => {
+        try {
+            let all = getAll();
+            if (!all)
+                all = populateLocalStorage();
+            setTimeout(() => resolve(all), 3000);
+        } catch (err) {
+            reject(err);
+        }
+    });
 }
 
 export function setNotifications(notifications) {

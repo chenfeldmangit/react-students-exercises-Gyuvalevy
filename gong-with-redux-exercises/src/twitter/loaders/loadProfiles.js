@@ -42,10 +42,16 @@ function populateLocalStorage() {
 }
 
 export function getProfiles() {
-    let all = getAll();
-    if (!all)
-        all = populateLocalStorage();
-    return all;
+    return new Promise((resolve, reject) => {
+        try {
+            let all = getAll();
+            if (!all)
+                all = populateLocalStorage();
+            setTimeout(() => resolve(all), 2000);
+        } catch (err) {
+            reject(err);
+        }
+    });
 }
 
 export function setProfiles(profiles) {

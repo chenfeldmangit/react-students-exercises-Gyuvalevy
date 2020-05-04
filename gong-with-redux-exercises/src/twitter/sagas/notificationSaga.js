@@ -2,33 +2,27 @@ import {takeLatest, put, select, call} from 'redux-saga/effects';
 import {getNotifications, setNotifications} from "../loaders/loadNotifications";
 import {
     ADD_NOTIFICATION,
-    DELETE_NOTIFICATIONS,
-    INIT_NOTIFICATIONS,
+    DELETE_NOTIFICATIONS, INIT_NOTIFICATIONS_FINISH,
+    INIT_NOTIFICATIONS_START,
     SET_NOTIFICATIONS
 } from "../actions/notificationsActions";
 import {getStateNotifications} from "../selectors/twitterSelectors";
 
 function* setNotificationsStores(notifications) {
-
     yield call(setNotifications, notifications);
-
-    yield put({
-        type: SET_NOTIFICATIONS,
-        payload: {
-            notifications: [...notifications]
-        }
-    });
+    yield put({type: SET_NOTIFICATIONS, payload: {notifications: [...notifications]}});
 }
 
 function* initNotifications() {
 
-    const notifications = getNotifications();
-    yield put({
-        type: SET_NOTIFICATIONS,
-        payload: {
-            notifications
-        }
-    });
+
+    try {
+        const notifications = yield call(getNotifications);
+        yield put({type: SET_NOTIFICATIONS, payload: {notifications}});
+        yield put({type: INIT_NOTIFICATIONS_FINISH, payload: {result: true}});
+    } catch (e) {
+        yield put({type: INIT_NOTIFICATIONS_FINISH, payload: {result: false, error: e}});
+    }
 }
 
 function* addNotification(action) {
@@ -50,9 +44,8 @@ function* deleteNotifications(action) {
 }
 
 
-
 export default function* root() {
-    yield takeLatest(INIT_NOTIFICATIONS, initNotifications);
+    yield takeLatest(INIT_NOTIFICATIONS_START, initNotifications);
     yield takeLatest(ADD_NOTIFICATION, addNotification);
     yield takeLatest(DELETE_NOTIFICATIONS, deleteNotifications);
 }

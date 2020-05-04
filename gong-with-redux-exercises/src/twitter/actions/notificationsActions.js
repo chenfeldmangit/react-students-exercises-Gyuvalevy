@@ -1,11 +1,12 @@
-export const INIT_NOTIFICATIONS = 'INIT_NOTIFICATIONS';
+export const INIT_NOTIFICATIONS_START = 'INIT_NOTIFICATIONS_START';
+export const INIT_NOTIFICATIONS_FINISH = 'INIT_NOTIFICATIONS_FINISH';
 export const SET_NOTIFICATIONS = 'SET_NOTIFICATIONS';
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION ';
 export const DELETE_NOTIFICATIONS = 'DELETE_NOTIFICATIONS';
 
-export function initNotifications() {
+export function initNotificationsStart() {
     return {
-        type: INIT_NOTIFICATIONS,
+        type: INIT_NOTIFICATIONS_START,
     };
 }
 

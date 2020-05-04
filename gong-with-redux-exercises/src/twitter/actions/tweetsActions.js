@@ -1,4 +1,5 @@
-export const INIT_TWEETS = 'INIT_TWEETS';
+export const INIT_TWEETS_START = 'INIT_TWEETS_START';
+export const INIT_TWEETS_FINISH = 'INIT_TWEETS_FINISH';
 export const SET_TWEETS = 'SET_TWEETS';
 export const ADD_TWEET = 'ADD_TWEET';
 export const REMOVE_TWEET = 'REMOVE_TWEET';
@@ -7,9 +8,15 @@ export const LIKE_TWEET = 'LIKE_TWEET';
 export const RETWEET_TWEET = 'RETWEET_TWEET';
 export const COMMENT_TWEET = 'COMMENT_TWEET';
 
-export function initTweets() {
+export function initTweetsStart() {
     return {
-        type: INIT_TWEETS,
+        type: INIT_TWEETS_START,
+    };
+}
+
+export function initTweetsFinish() {
+    return {
+        type: INIT_TWEETS_FINISH,
     };
 }
 

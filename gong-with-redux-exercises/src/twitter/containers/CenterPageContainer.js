@@ -1,13 +1,9 @@
 import {connect} from "react-redux";
 import CenterPage from "../components/CenterPage/CenterPage";
-import {setLoading} from "../actions/loadingActions";
 
 const mapStateToProps = (state) => ({
-    show: !state.showLoading,
+    show: !!state.currentUserDetails.currentUser,
+    hasErrors: state.error.showError,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    finishedLoading: () => dispatch(setLoading(false)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CenterPage)
+export default connect(mapStateToProps, null)(CenterPage)

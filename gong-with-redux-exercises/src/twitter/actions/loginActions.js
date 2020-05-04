@@ -1,10 +1,21 @@
-export const LOGIN_PROFILE = 'TRY_LOGIN';
+export const TRY_LOGIN = 'TRY_LOGIN';
+export const LOGIN_PROFILE = 'LOGIN_PROFILE';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT = 'LOGOUT';
 export const SIGN_UP = 'SIGN_UP';
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const SET_PROFILE = 'SET_PROFILE';
+
+export function tryLogin(username, password) {
+    return {
+        type: TRY_LOGIN,
+        payload: {
+            username,
+            password
+        },
+    };
+}
 
 export function loginProfile(profile) {
     return {
